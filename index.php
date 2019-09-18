@@ -1,5 +1,33 @@
 <?php
 include "includes/header.php";
+include "includes/dbconnect.php";
+require_once("includes/classes/Constants.php"); 
+require_once("includes/classes/FormSanitizer.php"); 
+require_once("includes/classes/Account.php");
+
+
+$account = new Account($con);
+if (isset($_POST['login'])) {
+   
+    $username = FormSanitizer::sanitizeFormUsername($_POST["username"]);
+    $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
+
+    $wasSuccessful = $account->login($username, $password);
+
+    if($wasSuccessful) {
+        echo "work";
+        // $_SESSION["userLoggedIn"] = $username;
+        // header("Location: index.php");
+    }
+
+}
+
+function getInputValue($name) {
+    if(isset($_POST[$name])) {
+        echo $_POST[$name];
+    }
+}
+
 ?>
 <div class="wrapper">
         <div class="row all">
@@ -8,12 +36,13 @@ include "includes/header.php";
         </div>
             <div class="col-md-5 use">
            
-                <form action="login.php" method="POST">
+                <form action="index.php" method="POST">
                     <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                     </div>
                     <div class="form-group">
-                    <input type="text" name="username" class="form-control form-control-user" placeholder="Username" required>
+                    <?php echo $account->getError(Constants::$loginFailed); ?>
+                    <input type="text" name="username" class="form-control form-control-user" placeholder="Username" value="<?php getInputValue('username'); ?>"  required>
                     </div>
                     <div class="form-group">
                     <input type="password" name="password" class="form-control form-control-user" placeholder="Password" required>
@@ -26,6 +55,18 @@ include "includes/header.php";
 </div>
 </div>
 <style>
+.signInMessage {
+    font-size: 14px;
+    font-weight: 400;
+    color: #212529;
+}
+
+.errorMessage {
+    color: #f00;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}
 .use{
 
   margin-bottom: 16.1vh;
