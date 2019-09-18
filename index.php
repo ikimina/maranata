@@ -13,12 +13,43 @@ if (isset($_POST['login'])) {
     $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
 
     $wasSuccessful = $account->login($username, $password);
-
-    if($wasSuccessful) {
-        echo "work";
-        // $_SESSION["userLoggedIn"] = $username;
-        // header("Location: index.php");
+      
+    if($wasSuccessful=="0") {
+       $_SESSION["user"] = $username;
+       $_SESSION["role"] = $wasSuccessful;
+     header("Location: users/");
+     exit();
     }
+    if($wasSuccessful=="1") {
+        $_SESSION["user"] = $username;
+        $_SESSION["role"] = $wasSuccessful;
+      header("Location: imari/");
+      exit();
+     }
+     if($wasSuccessful=="2") {
+        $_SESSION["user"] = $username;
+        $_SESSION["role"] = $wasSuccessful;
+      header("Location: loan_provider/");
+      exit();
+     }
+     if($wasSuccessful=="3") {
+        $_SESSION["user"] = $username;
+        $_SESSION["role"] = $wasSuccessful;
+      header("Location: nyobozi/");
+      exit();
+     }
+     if($wasSuccessful=="4") {
+        $_SESSION["user"] = $username;
+        $_SESSION["role"] = $wasSuccessful;
+      header("Location: loan_corrector/");
+      exit();
+     }
+     if($wasSuccessful=="5") {
+        $_SESSION["user"] = $username;
+        $_SESSION["role"] = $wasSuccessful;
+      header("Location: superadmin/");
+      exit();
+     }
 
 }
 

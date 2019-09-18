@@ -15,10 +15,13 @@ class Account {
         $query->bindParam(":un", $un);
         $query->bindParam(":pw", $pw);
 
-        $query->execute();
-
+        $query->execute();           
         if($query->rowCount() == 1) {
-            return true;
+            $input = $query->fetch(PDO::FETCH_ASSOC);
+          
+            $type=$input['type'];
+             
+         return $type;
         }
         else {
             array_push($this->errorArray, Constants::$loginFailed);
