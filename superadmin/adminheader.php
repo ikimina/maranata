@@ -2,9 +2,6 @@
 include ("../includes/header.php");
 ?>
 
-
-
-
 <!--Navbar -->
 <nav class="mb-1 navbar navbar-expand-lg" style="background-color:  #00b386;" >
   <a class="navbar-brand" href="index.php">Maranata</a>
@@ -20,7 +17,7 @@ include ("../includes/header.php");
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="oursongs.php">Members</a>
+        <a class="nav-link" href="registration.php">Members</a>
       </li>
 
       <li class="nav-item">
