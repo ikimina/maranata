@@ -4,7 +4,7 @@ include "includes/header.php";
 <div class="wrapper">
         <div class="row all">
         <div class="head">
-            <h3>Welcome to Ikimina-Maranata </h3>
+            <h3>Welcome to ikimina-maranata </h3>
         </div>
             <div class="col-md-5 use">
            
@@ -18,7 +18,7 @@ include "includes/header.php";
                     <div class="form-group">
                     <input type="password" name="password" class="form-control form-control-user" placeholder="Password" required>
                     </div>
-                    <button type="submit" name="login" class="btn btn-primary form-control"> Login </button>
+                    <button type="submit" name="login" class="btn btn-primary btn-user btn-block" > Login </button>
                     <hr>
                 </form>
             </div>
