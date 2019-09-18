@@ -1,7 +1,7 @@
 <div class="footer">
-    <div>&copy; <script>
+    <div><center>&copy; <script>
         var date=new Date();
-    document.write(date.getFullYear());</script><a href="index.php">Ikimina</a> </div>
+    document.write(date.getFullYear());</script><a href="index.php"> Ikimina-Maranata</a></center></div>
 </div>
 </body>
 </html>

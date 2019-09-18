@@ -2,10 +2,12 @@
 include "includes/header.php";
 ?>
 <div class="wrapper">
-        <div class="row">
-        <h3>Welcome to ikimina-maranata </h3>
-            <div class="head"></div>
+        <div class="row all">
+        <div class="head">
+            <h3>Welcome to ikimina-maranata </h3>
+        </div>
             <div class="col-md-5 use">
+           
                 <form action="login.php" method="POST">
                     <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
@@ -20,11 +22,34 @@ include "includes/header.php";
                     <hr>
                 </form>
             </div>
-          
         </div>
 </div>
 </div>
+<style>
+.use{
 
+  margin-bottom: 16.1vh;
+  margin-left:23vw;
+  margin-right: 22.5vw;
+  box-shadow: 8px 4px 8px #ccc;
+  border: 1px solid #111;
+}
+.use form{
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  margin-left:3vw;
+  margin-right:3vw;
+}
+.head{
+    margin-bottom: 5vh;
+    margin-left:28vw; 
+    margin-right: 22.5vw;
+   
+}
+.all{
+    margin-top:22vh;
+}
+</style>
 <?php
 include "includes/footer.php";
 ?>
