@@ -18,7 +18,7 @@ include "includes/header.php";
                     <div class="form-group">
                     <input type="password" name="password" class="form-control form-control-user" placeholder="Password" required>
                     </div>
-                    <button type="submit" name="login" class="btn btn-primary btn-user btn-block"> Login </button>
+                    <button type="submit" name="login" class="btn btn-primary form-control"> Login </button>
                     <hr>
                 </form>
             </div>
