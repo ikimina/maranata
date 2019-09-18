@@ -79,7 +79,8 @@ include("adminheader.php");
      	<option>User</option>
      	<option>Accountant</option>
      	<option>Nyobozi</option>
-     	<option></option>
+     	<option>Ushinzwe gutanga inguzanyo</option>
+     	<option>Ushinzwe kugaruza inguzanyo</option>
      </select><br>
        
        <div class="row">
@@ -90,8 +91,20 @@ include("adminheader.php");
        		<button class="btn btn-warning btn-block btn-sm">Cancel</button>
        	</div>
        </div>
-				</form>
+	 </form>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header"></div>
+			<div class="card-body">
+				<table class="table table-stipped table-bordered">
+					<th>No</th>
+					<th>F Name</th>
+					<th>L Name</th>
+					<th>Type</th>
+					<th>Telephone</th>
+				</table>
 			</div>
 		</div>
 	</div>
-</div>
