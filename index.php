@@ -4,7 +4,7 @@ include "includes/header.php";
 <div class="wrapper">
         <div class="row all">
         <div class="head">
-            <h3>Welcome to ikimina-maranata </h3>
+            <h3>Welcome to Ikimina-Maranata Schadrack edition </h3>
         </div>
             <div class="col-md-5 use">
            
