@@ -3,7 +3,7 @@ include ("../includes/header.php");
 ?>
 
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg" style="background-color:  #00b386;" >
+<nav class="mb-1 navbar navbar-expand-lg" style="" >
   <a class="navbar-brand" href="index.php">Maranata</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@ include ("../includes/header.php");
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="oursongs.php">Staff</a>
+        <a class="nav-link" href="staff.php">Staff</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="#">Credit</a>

@@ -11,13 +11,14 @@ include("adminheader.php");
 					<th>No</th>
 					<th>F Name</th>
 					<th>L Name</th>
-					<th>Type</th>
+					<th>Duties</th>
 					<th>Telephone</th>
+          <th colspan="2">Operation</th>
 				</table>
 			</div>
 		</div><br>
 	<div class="card">
-		<div class="card-header">User Registration</div>
+		<div class="card-header">Staff Registration</div>
 		<div class="card-body">
 		<form method="POST">
 			<div class="row">
