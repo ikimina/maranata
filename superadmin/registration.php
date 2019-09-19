@@ -103,7 +103,8 @@ include("adminheader.php");
        	<div class="col-md-6">
        		<button class="btn btn-warning btn-block btn-sm">Cancel</button>
        	</div>
-       </div>
+	   </div>
+		</div>
 	 </form>
 			</div>
 		</div>

@@ -119,7 +119,7 @@ function getInputValue($name) {
    
 }
 .all{
-    margin-top:22vh;
+    margin-top:17vh;
 }
 </style>
 <?php
