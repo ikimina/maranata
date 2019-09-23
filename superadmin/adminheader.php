@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION["role"]) || $_SESSION["role"] !="5") {
+
+    header("location: ../index.php"); 
+    exit();
+} 
+$username= $_SESSION["user"];
 include ("../includes/header.php");
 ?>
 <!DOCTYPE html>
@@ -58,6 +65,8 @@ include ("../includes/header.php");
   <script type="text/javascript" src="js/mdb.min.js"></script>
 </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 

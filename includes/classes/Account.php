@@ -28,68 +28,94 @@ class Account {
             return false;
         }
     }
+    public function register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village) {
+        $this->validateFirstName($firstName);
+        $this->validateLastName($lastName);
+        $this->validatePhone($phone);
+        $this->validateId($idNo);
+        $this->validateSex($sex);
+        $this->validateMerital($merital);
+
+        if(empty($this->errorArray)) {
+            return $this->insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village);
+        }
+        else {
+            return false;
+        }
+    }
+
+    public function insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village) {
+
+        $query = $this->con->prepare("INSERT INTO members (
+   fname, lname, sex, district, sector, cell, village, province, dob, phone,  active)
+    VALUES (:fn, :ln, :sex, :district, :sector, :cell, :village, :province, :dob, :phone, :active)");
+                             $active="yes" ;          
+
+        $query->bindParam(":fn", $firstName);
+        $query->bindParam(":ln", $lastName);
+        $query->bindParam(":sex", $sex);
+        $query->bindParam(":phone", $phone);
+        $query->bindParam(":district", $district);
+        $query->bindParam(":sector", $sector);
+        $query->bindParam(":cell", $cell);
+        $query->bindParam(":village", $village);
+        $query->bindParam(":province", $province);
+        $query->bindParam(":dob", $dob);
+        $query->bindParam(":active", $active);
+         if ($query->execute()) {
+           $credential=array();
+            array_push($credential,$this->con->lastInsertId());
+           array_push($credential, $phone);
+            array_push($credential, "6");
+        return $credential;
+         }
+         else{
+            array_push($this->errorArray, Constants::$registerFailed);
+            return 0;
+         }
+    }
     
-    // public function register($fn, $ln, $un, $em, $em2, $pw, $pw2) {
-    //     $this->validateFirstName($fn);
-    //     $this->validateLastName($ln);
-    //     $this->validateUsername($un);
-    //     $this->validateEmails($em, $em2);
-    //     $this->validatePasswords($pw, $pw2);
+    private function validateFirstName($fn) {
+        if(strlen($fn) > 25 || strlen($fn) < 2) {
+            array_push($this->errorArray, Constants::$firstNameCharacters);
+        }
+    }
 
-    //     if(empty($this->errorArray)) {
-    //         return $this->insertUserDetails($fn, $ln, $un, $em, $pw);
-    //     }
-    //     else {
-    //         return false;
-    //     }
-    // }
+    private function validateLastName($ln) {
+        if(strlen($ln) > 25 || strlen($ln) < 2) {
+            array_push($this->errorArray, Constants::$lastNameCharacters);
+        }
+    }
 
-    // public function insertUserDetails($fn, $ln, $un, $em, $pw) {
-        
-    //     $pw = hash("sha512", $pw);
-    //     $profilePic = "assets/images/profilePictures/default.png";
+    private function validatePhone($un) {
+        if(strlen($un) > 15 || strlen($un) < 10) {
+            array_push($this->errorArray, Constants::$PhoneInvalid);
+            return;
+        }
 
-    //     $query = $this->con->prepare("INSERT INTO users (firstName, lastName, username, email, password, profilePic)
-    //                                     VALUES(:fn, :ln, :un, :em, :pw, :pic)");
+        $query = $this->con->prepare("SELECT phone FROM members WHERE phone=:un");
+        $query->bindParam(":un", $un);
+        $query->execute();
 
-    //     $query->bindParam(":fn", $fn);
-    //     $query->bindParam(":ln", $ln);
-    //     $query->bindParam(":un", $un);
-    //     $query->bindParam(":em", $em);
-    //     $query->bindParam(":pw", $pw);
-    //     $query->bindParam(":pic", $profilePic);
-        
-    //     return $query->execute();
-    // }
-    
-    // private function validateFirstName($fn) {
-    //     if(strlen($fn) > 25 || strlen($fn) < 2) {
-    //         array_push($this->errorArray, Constants::$firstNameCharacters);
-    //     }
-    // }
+        if($query->rowCount() != 0) {
+            array_push($this->errorArray, Constants::$usernameTaken);
+        }
 
-    // private function validateLastName($ln) {
-    //     if(strlen($ln) > 25 || strlen($ln) < 2) {
-    //         array_push($this->errorArray, Constants::$lastNameCharacters);
-    //     }
-    // }
-
-    // private function validateUsername($un) {
-    //     if(strlen($un) > 25 || strlen($un) < 5) {
-    //         array_push($this->errorArray, Constants::$usernameCharacters);
-    //         return;
-    //     }
-
-    //     $query = $this->con->prepare("SELECT username FROM users WHERE username=:un");
-    //     $query->bindParam(":un", $un);
-    //     $query->execute();
-
-    //     if($query->rowCount() != 0) {
-    //         array_push($this->errorArray, Constants::$usernameTaken);
-    //     }
-
-    // }
-
+    }
+ private function validateSex($sex)
+  {
+      if(empty($sex)) {
+            array_push($this->errorArray, Constants::$SelectSex);
+            return;
+        }
+  }
+  private function validateMerital($merital)
+  {
+      if(empty($merital)) {
+            array_push($this->errorArray, Constants::$SelectMeritalStatus);
+            return;
+        }
+  }
     // private function validateEmails($em, $em2) {
     //     if($em != $em2) {
     //         array_push($this->errorArray, Constants::$emailsDoNotMatch);
@@ -111,21 +137,19 @@ class Account {
 
     // }
 
-    // private function validatePasswords($pw, $pw2) {
-    //     if($pw != $pw2) {
-    //         array_push($this->errorArray, Constants::$passwordsDoNotMatch);
-    //         return;
-    //     }
+    private function validateId($id) {
+     
+   if(strlen($id) != 16) {
+            array_push($this->errorArray, Constants::$IdInvalid);
+            return;
+        }
+        if(preg_match("/[^0-9]/", $id)) {
+            array_push($this->errorArray, Constants::$IdNotAlphanumeric);
+            return;
+        }
 
-    //     if(preg_match("/[^A-Za-z0-9]/", $pw)) {
-    //         array_push($this->errorArray, Constants::$passwordNotAlphanumeric);
-    //         return;
-    //     }
-
-    //     if(strlen($pw) > 30 || strlen($pw) < 5) {
-    //         array_push($this->errorArray, Constants::$passwordLength);
-    //     }
-    // }
+        
+    }
     
     public function getError($error) {
         if(in_array($error, $this->errorArray)) {
