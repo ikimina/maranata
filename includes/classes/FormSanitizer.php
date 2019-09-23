@@ -25,6 +25,11 @@ class FormSanitizer {
         $inputText = str_replace(" ", "", $inputText);
         return $inputText;
     }
+    public static function sanitizeTelephone($inputText) {
+        $inputText = strip_tags($inputText);
+        $inputText = str_replace(" ", "", $inputText);
+        return $inputText;
+    }
 
 }
 ?>
