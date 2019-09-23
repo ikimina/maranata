@@ -1,1 +1,3 @@
-<?php echo 'users'; ?>
+<?php
+include("usersheader.php");
+?>

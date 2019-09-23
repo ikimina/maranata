@@ -20,17 +20,17 @@ include ("../includes/header.php");
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="registration.php">Members</a>
+        <a class="nav-link" href="registration.php">Savings</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="staff.php">Staff</a>
+        <a class="nav-link" href="staff.php">Credit</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#">Credit</a>
+        <a class="nav-link" href="#">Transaction</a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Debit</a>
+        <a class="nav-link" href="#">Notification</a>
       </li>
 
     </ul>
@@ -43,8 +43,7 @@ include ("../includes/header.php");
         </a>
       </li>
 
-<!-- &nbsp&nbsp&nbsp --> 
-             
+<!-- &nbsp&nbsp&nbsp -->         
       <li class="nav-item">
       <a class="nav-link" href="admin.php">Logout</a>
       </li>
