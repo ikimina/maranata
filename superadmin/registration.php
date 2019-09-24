@@ -51,7 +51,7 @@ include("adminheader.php");
        </div>
 				</div>
 				<div class="col-md-6">
-				<center><h5 class="alert alert-success">Adress info</h5></center>
+				<center><h5 class="alert alert-success">Address info</h5></center>
 
 	<div class="input-group mb-3">
       <div class="input-group-prepend">
