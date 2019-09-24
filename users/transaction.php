@@ -1,12 +1,11 @@
-
 <?php
-include("usersheader.php");
+include ("usersheader.php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Maranata-<?php echo  $_SESSION["user"]?> | Notifications</title>
+	<title>Maranata-<?php echo  $_SESSION["user"]?> | T-History</title>
 </head>
 <body>
 <div class="container-fluid">
@@ -19,13 +18,13 @@ include("usersheader.php");
           	echo '<br>';}
           ?>
 		 	<div>
-		 	<i class="fa fa-bell" aria-hidden="true" aria-hidden="true">&nbsp&nbsp&nbsp&nbspNew <span class="badge badge-light">10</span></i>
+		 	<i class="fa fa-bell" aria-hidden="true" aria-hidden="true">&nbsp&nbsp&nbsp&nbspLatest<span class="badge badge-light">10</span></i>
 		 </div>
 		 <div>
-		 	<i class="fa fa-folder-open" aria-hidden="true">&nbsp&nbsp&nbsp&nbspRead</i>
+		 	<i class="fa fa-folder-open" aria-hidden="true">&nbsp&nbsp&nbsp&nbspSavings</i>
 		 </div>
 		 <div>
-		 	<i class="fa fa-folder" aria-hidden="true">&nbsp&nbsp&nbsp&nbspUnread</i>
+		 	<i class="fa fa-folder" aria-hidden="true">&nbsp&nbsp&nbsp&nbspCredits</i>
 		 </div>
 		 <div>
 		 	<i class="fa fa-archive" aria-hidden="true">&nbsp&nbsp&nbsp&nbspArchive</i>
@@ -42,7 +41,7 @@ include("usersheader.php");
 
 		<div class="col-md-10">
 			<div class="card">
-				<div class="card-header"><center>Notifications</center></div>
+				<div class="card-header"><center>Transactions</center></div>
 				<div class="card-body"></div>
 				<div class="card-footer"></div>
 			</div>

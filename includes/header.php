@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +13,5 @@
     <link rel="stylesheet" href="public/bootstrap4/css/bootstrap.min.css">
     <script src="../public/js/jquery.min.js"></script>
     <script src="../public/bootstrap4/js/bootstrap.min.js"></script>
-    <title></title>
 </head>
-
-
-
-
-
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="js/popper.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/mdb.min.js"></script>
 <body>

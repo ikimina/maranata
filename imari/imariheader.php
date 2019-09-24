@@ -1,13 +1,14 @@
+
 <?php
 include ("../includes/header.php");
-if (!isset($_SESSION["role"]) || $_SESSION["role"] !="6") {
+if (!isset($_SESSION["role"]) || $_SESSION["role"] !="1") {
 
     header("location: ../index.php"); 
     exit();
 } 
 $username= $_SESSION["user"];
-?>
 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -27,13 +28,10 @@ $username= $_SESSION["user"];
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="credits.php">Credit <span class="badge badge-warning">00000</span></a>
+        <a class="nav-link" href="members.php">Members</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="transaction.php">Transaction </a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link" href="notification.php">Notification <span class="badge badge-info">3</span></a>
+        <a class="nav-link" href="transaction.php">Transaction</a>
       </li>
 
     </ul>
@@ -48,7 +46,7 @@ $username= $_SESSION["user"];
 
 <!-- &nbsp&nbsp&nbsp -->         
       <li class="nav-item">
-      <a class="nav-link" href="admin.php">Logout</a>
+      <a class="nav-link" href="../logout.php">Logout</a>
       </li>
     </ul>
   </div>
