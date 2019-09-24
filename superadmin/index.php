@@ -1,6 +1,9 @@
+<?php
 
+?>
 <?php
 include("adminheader.php");
+
 ?>
 <br>
 <div class="container"></div>

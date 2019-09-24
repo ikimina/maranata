@@ -1,4 +1,11 @@
 <?php
+session_start();
+if (!isset($_SESSION["role"]) || $_SESSION["role"] !="5") {
+
+    header("location: ../index.php"); 
+    exit();
+} 
+$username= $_SESSION["user"];
 include ("../includes/header.php");
 ?>
 
@@ -49,7 +56,7 @@ include ("../includes/header.php");
   </div>
 </nav>
 <!--/.Navbar -->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 
 

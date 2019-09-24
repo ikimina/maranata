@@ -4,7 +4,7 @@ include "includes/dbconnect.php";
 require_once("includes/classes/Constants.php"); 
 require_once("includes/classes/FormSanitizer.php"); 
 require_once("includes/classes/Account.php");
-
+session_start();
 
 $account = new Account($con);
 if (isset($_POST['login'])) {
@@ -13,43 +13,48 @@ if (isset($_POST['login'])) {
     $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
 
     $wasSuccessful = $account->login($username, $password);
-      
-    if($wasSuccessful=="0") {
+      switch ($wasSuccessful) {
+        case '6':
        $_SESSION["user"] = $username;
        $_SESSION["role"] = $wasSuccessful;
-     header("Location: users/");
-     exit();
-    }
-    if($wasSuccessful=="1") {
+       header("Location: users/");
+          break;
+        case '1':
         $_SESSION["user"] = $username;
         $_SESSION["role"] = $wasSuccessful;
-      header("Location: imari/");
-      exit();
-     }
-     if($wasSuccessful=="2") {
+         header("Location: imari/");
+          break;
+        case '2':
+         $_SESSION["user"] = $username;
+        $_SESSION["role"] = $wasSuccessful;
+        header("Location: loan_provider/");
+          break;
+        case '3':
+         
         $_SESSION["user"] = $username;
         $_SESSION["role"] = $wasSuccessful;
-      header("Location: loan_provider/");
-      exit();
-     }
-     if($wasSuccessful=="3") {
+        header("Location: nyobozi/");
+          break;
+        case '4':
+         
         $_SESSION["user"] = $username;
         $_SESSION["role"] = $wasSuccessful;
-      header("Location: nyobozi/");
-      exit();
-     }
-     if($wasSuccessful=="4") {
+        header("Location: loan_corrector/");
+         break;
+        case '5':
+         
         $_SESSION["user"] = $username;
         $_SESSION["role"] = $wasSuccessful;
-      header("Location: loan_corrector/");
-      exit();
-     }
-     if($wasSuccessful=="5") {
-        $_SESSION["user"] = $username;
-        $_SESSION["role"] = $wasSuccessful;
-      header("Location: superadmin/");
-      exit();
-     }
+        header("Location: superadmin/");
+         
+         break;
+     
+        default:
+        session_destroy();
+          break;
+      }
+  
+    
 
 }
 
@@ -60,10 +65,20 @@ function getInputValue($name) {
 }
 
 ?>
-<div class="wrapper">
+<div class="container">
         <div class="row all">
-        <div class="head">
-            <h3>Welcome to ikimina-maranata </h3>
+        <div class="head"><div class="row">
+          <div class="col-md-3"></div>
+<div class="col-md-8">
+           <div class="col-xl-5 col-md-5 mb-3 text-center">
+
+    <img src="images/logo.jpg" class="img-fluid z-depth-1 rounded-circle"
+      alt="Responsive image">
+
+  </div>
+ 
+            </div><div class="col-md-1"></div>
+          </div>
         </div>
             <div class="col-md-5 use">
            
@@ -73,7 +88,7 @@ function getInputValue($name) {
                     </div>
                     <div class="form-group">
                     <?php echo $account->getError(Constants::$loginFailed); ?>
-                    <input type="text" name="username" class="form-control form-control-user" placeholder="Username" value="<?php getInputValue('username'); ?>"  required>
+                    <input type="text" name="username" class="form-control form-control-user" placeholder="Telephone" value="<?php getInputValue('username'); ?>"  required>
                     </div>
                     <div class="form-group">
                     <input type="password" name="password" class="form-control form-control-user" placeholder="Password" required>
