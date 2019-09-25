@@ -19,5 +19,8 @@ class Constants {
     public static $SelectMeritalStatus = "Select Merital Status Please";
 
     public static $loginFailed = "Your username or password was incorrect";
+    public static $done="Registration successful";
+    public static $fail ="Registration Failed";
+    public static $invaliImage="Image not Supported";
 }
 ?>

@@ -38,7 +38,10 @@ class Account {
         $this->validateMerital($merital);
         $this->validateEmails($email);
          if ($type!=null && empty($this->errorArray)) {
-             return $this->insertStaffDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email);
+
+            $this->validatePhoneAdmin($phone);
+           $location= $this->uploadPicture($file);
+             return $this->insertStaffDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$location,$email);
           }
         if(empty($this->errorArray)) {
             return $this->insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village);
@@ -51,10 +54,9 @@ class Account {
     public function insertStaffDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email)
     {
       
-      $fileName="gggggggggg";
-        $query = $this->con->prepare("INSERT INTO staff (
-   fname, lname, sex, district, sector, cell, village, province, dob, phone,type,email,photo,active)
-    VALUES (:fn, :ln, :sex, :district, :sector, :cell, :village, :province, :dob, :phone,:type,:email,:photo, :active)");
+     
+        $query = $this->con->prepare("INSERT INTO staff (fname, lname, sex, district, sector, cell, village, province, dob, phone, role, email, active, picture,mstatus)
+    VALUES (:fn, :ln, :sex, :district, :sector, :cell, :village, :province, :dob, :phone,:role,:email, :active,:picture,:mstatus)");
                              $active="yes" ;          
 
         $query->bindParam(":fn", $firstName);
@@ -67,21 +69,19 @@ class Account {
         $query->bindParam(":village", $village);
         $query->bindParam(":province", $province);
         $query->bindParam(":dob", $dob);
-        $query->bindParam(":type", $type);
+        $query->bindParam(":role", $type);
         $query->bindParam(":email", $email);
-
-        $query->bindParam(":photo", $fileName);
         $query->bindParam(":active", $active);
+
+        $query->bindParam(":picture", $file);
+         $query->bindParam(":mstatus", $merital);
          if ($query->execute()) {
-           $credential=array();
-            array_push($credential,$this->con->lastInsertId());
-           array_push($credential, $phone);
-            array_push($credential, $type);
-        return $credential;
+          
+        return $this->insertCredention($this->con->lastInsertId(),$phone,$type);
          }
          else{
             array_push($this->errorArray, Constants::$registerFailed);
-            return 0;
+            return false;
          }
 
     }
@@ -104,15 +104,12 @@ class Account {
         $query->bindParam(":dob", $dob);
         $query->bindParam(":active", $active);
          if ($query->execute()) {
-           $credential=array();
-            array_push($credential,$this->con->lastInsertId());
-           array_push($credential, $phone);
-            array_push($credential, "6");
-        return $credential;
+           
+        return $this->insertCredention($this->con->lastInsertId(),$phone,"6");;
          }
          else{
             array_push($this->errorArray, Constants::$registerFailed);
-            return 0;
+            return false;
          }
     }
     
@@ -135,6 +132,22 @@ class Account {
         }
 
         $query = $this->con->prepare("SELECT phone FROM members WHERE phone=:un");
+        $query->bindParam(":un", $un);
+        $query->execute();
+
+        if($query->rowCount() != 0) {
+            array_push($this->errorArray, Constants::$usernameTaken);
+        }
+
+    }
+
+    private function validatePhoneAdmin($un) {
+        if(strlen($un) > 15 || strlen($un) < 10) {
+            array_push($this->errorArray, Constants::$PhoneInvalid);
+            return;
+        }
+
+        $query = $this->con->prepare("SELECT phone FROM staff WHERE phone=:un");
         $query->bindParam(":un", $un);
         $query->execute();
 
@@ -196,6 +209,41 @@ class Account {
             return "<span class='errorMessage'>$error</span>";
         }
     }
+  public function insertCredention($uid,$username,$type)
+  {
+       $query = $this->con->prepare("INSERT INTO credential(user_id, username, password,type)
+                                    VALUES (:uid, :username, :password, :type)") ;          
 
-}
-?>
+        $query->bindParam(":uid", $uid);
+        $query->bindParam(":username", $username);
+        $query->bindParam(":password", $password);
+         $query->bindParam(":type", $type);
+
+        
+        $password="00000";
+        if ($query->execute()) {
+            return true;
+        }
+        else{
+        return false;
+                }
+        
+  }
+  public function uploadPicture($file)
+  {
+     $allowed=array('gif','jpg','jpeg','png');
+     $fileName1=$file['name'];
+     $fileExt1=explode('.', $fileName1);
+     $fileActualExt1=strtolower(end($fileExt1));
+     if (in_array($fileActualExt1, $allowed)) {
+      $newname1 =$fileExt1[0].uniqid('',true).".".$fileActualExt1;
+       $fileDestination1='../images/staff/'.$newname1;
+      if(move_uploaded_file( $file['tmp_name'],$fileDestination1)){
+        return  $fileDestination1;
+      } 
+     }
+       else{
+         array_push($this->errorArray, Constants::$invaliImage);
+         return;
+       }
+}} ?>
