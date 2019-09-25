@@ -1,0 +1,149 @@
+users:
+-umunyamuryango usanzwe:
+   *id
+   *conte_id/ubwizigane
+   *izina
+   *sex
+   *irangamuntu
+   *akarere/umurenge/akagari/umudugudu
+   *ifoto
+   *dob
+   *Telephone
+   *username
+   *password
+   *created_date
+   *active
+-umucungamari
+-ushinzwe gutanga inguzanyo
+-ushinzwe inama nyobozi
+-ushinzwe kugaruza inguzanyo:
+_ushinzwe system yose
+   *id
+   *izina
+   *sex
+   *irangamuntu
+   *akarere/umurenge/akagari/umudugudu
+   *ifoto
+   *dob
+   *Telephone
+   *email
+   *username
+   *password
+   *created_date
+   *Type(icyashizwe)
+
+
+
+table:
+-ubwizigame:
+    *id
+    *user_id
+    *Amount
+-Transaction
+    *id
+    *user_id
+    *amount+or_(avuye kuri conte cg agiyeho)
+    *igikozwe(ex.inguzanyo yakiriwe,abikujwe,abikijwe,hishyuwe inguzanyo)
+    *itariki
+_inguzanyo
+    *id
+    *user_id(uwatse inguzanyo)
+    *amount(ingano yinguzanyo)
+    *itariki(ayakiyeho)
+    *itariki(igihe ntarengwa izishyurirwa)
+    *rate
+    *Amazina yumwishingizi
+    *isano
+    *irangamuntu yumwinshingizi
+    *active(yarishuye?)
+    *amaze kwishyurwe
+_abemerewe inguzanyo
+    *id
+    *user_id
+    *Amount(ayo yemerewe)
+    *date
+    *status
+    
+Users page:
+1.login
+2.profile(umwirondoro)
+3.ubwizigame(balance):
+ *
+4.notification
+5.ibyakozwe(transaction)
+6.ideni:
+    *ingano
+    *abishingizi
+7.raporo
+
+
+umucungamari page:
+ 1.login
+ 2.Abanyamuryango:
+      *kwingiza  Umunyamuryango mushya
+      *list yabamuryango(ubwizigame,ideni,edit,delete)
+      *archive(abigeze kuba abanyamuryango:permanent delete,restore)
+ 3.Transaction:
+     list yabanyamuryango(kuzigama)
+     list yabanyamuryango bemerewe  inguzanyo(gutanga inguzanyo)
+ 4.dashboard
+     *Balance (ubwizigame bwose)
+     *amadeni(yose tanzwe)
+     *amadeni(yose yishyuwe)
+     *amadeni(yose atarishyurwa)
+ 5.raporo(pdf,excel,word,csv)
+ 6.logout
+
+
+
+ushinzwe gutanga inguzanyo:
+   * login
+   *abanyamuryango
+     list(view:amakru amwerekeyeho)
+   *user info  page
+   *inguzanyo 
+   *logout
+
+
+ushinzwe kugaruza inguzanyo:
+  *login
+  *list yabafite inguzanyo n'abazishyuye(view:amakru ayerekeyeho)
+  (view:Guhanaguraho umuntu inguzanyo)
+  *raporo(pdf,excel,word,csv)
+  *logout
+
+ushinzwe inama nyobozi:
+   1.login
+   2.abanyamuryango
+      list((view:profile))
+   3 dashboard
+     *inguzanyo(umwaka, amezi)
+     *Balance (ubwizigame bwose)
+     *amadeni(yose tanzwe)
+     *amadeni(yose yishyuwe)
+     *amadeni(yose atarishyurwa)
+   4.ubwizigame(transction)
+   5.Amadeni(transaction)
+   6.logout
+ushinzwe system yose:
+  1.login
+  2. dashboard
+     *inguzanyo(umwaka, amezi)
+     *Balance (ubwizigame bwose)
+     *amadeni(yose tanzwe)
+     *amadeni(yose yishyuwe)
+     *amadeni(yose atarishyurwa)
+     *umabare wamanyamuryango
+   3.Abanyamuryango
+      register
+      list
+   4.Abakozi
+      list(icyobakora,edit,delete)
+   5.inguzanyo
+      list yabafite inguzanyo(status)
+   6.ubwizagame
+   7.raporo
+   8.logout
+
+
+
