@@ -4,7 +4,7 @@ include "includes/dbconnect.php";
 require_once("includes/classes/Constants.php"); 
 require_once("includes/classes/FormSanitizer.php"); 
 require_once("includes/classes/Account.php");
-session_start();
+//session_start();
 
 $account = new Account($con);
 if (isset($_POST['login'])) {

@@ -28,14 +28,18 @@ class Account {
             return false;
         }
     }
-    public function register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village) {
+    public function register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email) {
+        
         $this->validateFirstName($firstName);
         $this->validateLastName($lastName);
         $this->validatePhone($phone);
         $this->validateId($idNo);
         $this->validateSex($sex);
         $this->validateMerital($merital);
-
+        $this->validateEmails($email);
+         if ($type!=null && empty($this->errorArray)) {
+             return $this->insertStaffDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email);
+          }
         if(empty($this->errorArray)) {
             return $this->insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village);
         }
@@ -44,6 +48,43 @@ class Account {
         }
     }
 
+    public function insertStaffDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email)
+    {
+      
+      $fileName="gggggggggg";
+        $query = $this->con->prepare("INSERT INTO staff (
+   fname, lname, sex, district, sector, cell, village, province, dob, phone,type,email,photo,active)
+    VALUES (:fn, :ln, :sex, :district, :sector, :cell, :village, :province, :dob, :phone,:type,:email,:photo, :active)");
+                             $active="yes" ;          
+
+        $query->bindParam(":fn", $firstName);
+        $query->bindParam(":ln", $lastName);
+        $query->bindParam(":sex", $sex);
+        $query->bindParam(":phone", $phone);
+        $query->bindParam(":district", $district);
+        $query->bindParam(":sector", $sector);
+        $query->bindParam(":cell", $cell);
+        $query->bindParam(":village", $village);
+        $query->bindParam(":province", $province);
+        $query->bindParam(":dob", $dob);
+        $query->bindParam(":type", $type);
+        $query->bindParam(":email", $email);
+
+        $query->bindParam(":photo", $fileName);
+        $query->bindParam(":active", $active);
+         if ($query->execute()) {
+           $credential=array();
+            array_push($credential,$this->con->lastInsertId());
+           array_push($credential, $phone);
+            array_push($credential, $type);
+        return $credential;
+         }
+         else{
+            array_push($this->errorArray, Constants::$registerFailed);
+            return 0;
+         }
+
+    }
     public function insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village) {
 
         $query = $this->con->prepare("INSERT INTO members (
@@ -116,26 +157,25 @@ class Account {
             return;
         }
   }
-    // private function validateEmails($em, $em2) {
-    //     if($em != $em2) {
-    //         array_push($this->errorArray, Constants::$emailsDoNotMatch);
-    //         return;
-    //     }
+    private function validateEmails($em) {
+       if ($em==null) {
+           return;
+       }
 
-    //     if(!filter_var($em, FILTER_VALIDATE_EMAIL)) {
-    //         array_push($this->errorArray, Constants::$emailInvalid);
-    //         return;
-    //     }
+        if(!filter_var($em, FILTER_VALIDATE_EMAIL)) {
+            array_push($this->errorArray, Constants::$emailInvalid);
+            return;
+        }
 
-    //     $query = $this->con->prepare("SELECT email FROM users WHERE email=:em");
-    //     $query->bindParam(":em", $em);
-    //     $query->execute();
+        $query = $this->con->prepare("SELECT email FROM staff WHERE email=:em");
+        $query->bindParam(":em", $em);
+        $query->execute();
 
-    //     if($query->rowCount() != 0) {
-    //         array_push($this->errorArray, Constants::$emailTaken);
-    //     }
+        if($query->rowCount() != 0) {
+            array_push($this->errorArray, Constants::$emailTaken);
+        }
 
-    // }
+    }
 
     private function validateId($id) {
      

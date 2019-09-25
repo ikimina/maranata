@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +13,5 @@
     <link rel="stylesheet" href="public/bootstrap4/css/bootstrap.min.css">
     <script src="../public/js/jquery.min.js"></script>
     <script src="../public/bootstrap4/js/bootstrap.min.js"></script>
-    <title></title>
 </head>
 <body>
