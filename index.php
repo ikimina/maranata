@@ -1,5 +1,6 @@
 <?php
 include "includes/header.php";
+session_start();
 include "includes/dbconnect.php";
 require_once("includes/classes/Constants.php"); 
 require_once("includes/classes/FormSanitizer.php"); 
