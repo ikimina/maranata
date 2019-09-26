@@ -110,3 +110,8 @@ include("usersheader.php");
 
 </body>
 </html>
+    <h5 class="alert alert-success"><center>Bank info</center></h5>
+     <div class="input-group">
+  <input type="text" aria-label="First name" class="form-control">&nbsp
+  <input type="text" aria-label="Last name" class="form-control">
+</div>

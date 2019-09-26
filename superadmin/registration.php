@@ -181,7 +181,8 @@ $rows = $con->query($sql)->fetchColumn();
        		<button class="btn btn-warning btn-block btn-sm" type="button" id="cancel">Cancel</button>
        	</div>
 	   </div>
-		</div></div>
+		</div>
+    </div>
 	 </form>
 			</div>
 		</div>
