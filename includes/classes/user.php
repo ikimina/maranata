@@ -12,7 +12,10 @@ class User
 		$this->con=$con;
 		$this->tel=$tel;
 	}
-
+    public function getFname()
+    {
+    	return $this->tel;
+    }
 	
 }
 

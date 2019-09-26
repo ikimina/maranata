@@ -1,5 +1,4 @@
 <?php
-session_start();
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="5") {
 
     header("location: ../index.php"); 
@@ -45,7 +44,7 @@ include ("../includes/header.php");
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
         <a class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span>User</span></i> 
+        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo $_SESSION["user"]; ?></span></i> 
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>
