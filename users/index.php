@@ -1,3 +1,4 @@
+
 <?php
 include("usersheader.php");
 require_once("../includes/dbconnect.php");
@@ -9,9 +10,11 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
 <!DOCTYPE html>
 <html>
 <head>
+
 	<title>Maranata-<?php echo  $userLoggedIn->getFname();?> | Dashboard</title>
+
 </head>
-<body>
+<body><br>
 <div class="container">
  <div class="row">
  	<div class="col-md-4">
@@ -114,3 +117,4 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
 
 </body>
 </html>
+

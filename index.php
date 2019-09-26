@@ -1,6 +1,6 @@
 <?php
-include "includes/header.php";
 session_start();
+include "includes/header.php";
 include "includes/dbconnect.php";
 require_once("includes/classes/Constants.php"); 
 require_once("includes/classes/FormSanitizer.php"); 
@@ -66,6 +66,7 @@ function getInputValue($name) {
 }
 
 ?>
+<div></div>
 <div class="container">
         <div class="row all">
         <div class="head"><div class="row">

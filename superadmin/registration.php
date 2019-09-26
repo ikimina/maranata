@@ -96,11 +96,7 @@ $rows = $con->query($sql)->fetchColumn();
            <?php echo $account->getError(Constants::$IdInvalid); ?>
             <?php echo $account->getError(Constants::$IdNotAlphanumeric); ?>
 					<input class="form-control" type="text" name="idno" min="1" placeholder="ID Number" value="<?php getInputValue('idno'); ?>"><br>
-                 <?php echo $account->getError(Constants::$PhoneInvalid); ?>
-           <?php echo $account->getError(Constants::$usernameTaken); ?>
-    
-      <input type="number" class="form-control" name="phone" min="0" placeholder="Telephone"><br>
-   
+
            <?php echo $account->getError(Constants::$SelectSex); ?>
 					<select class="form-control" name="sex">
 					<option selected disabled>Select Gender</option>
@@ -172,27 +168,24 @@ $rows = $con->query($sql)->fetchColumn();
       </div>
       <input type="text" class="form-control" name="village" >
      </div>
-      
-        <center><h5 class="alert alert-success">Other info</h5></center>
-        <select class="form-control" name="bank" id="province" >
-            <option ></option>
-            <option value="Bank Of Kigali">Bank Of Kigali</option>
-            <option value="BPR">BPR</option>
-            <option value="Equity">Equity</option>
-            <option value="Sacco">Sacco</option>
-            <option value="Git Bank">Git Bank</option>
 
-          </select>
-      
-      <input type="text" class="form-control" name="bankaccount" min="0" placeholder="Account Number"><br>
-      <input type="text" class="form-control" name="accountowner" min="0" placeholder="Account Owner"><br>
+           <?php echo $account->getError(Constants::$PhoneInvalid); ?>
+           <?php echo $account->getError(Constants::$usernameTaken); ?>
+     <div class="input-group mb-3">
+      <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">Telephone</span>
+      </div>
+      <input type="number" class="form-control" name="phone" min="0">
+    </div><br>
+       <div class="row">
+       	<div class="col-md-6">
+       		<button class="btn btn-success btn-block btn-sm" name="register" >Register</button>
+       	</div>
+       	<div class="col-md-6">
+       		<button class="btn btn-warning btn-block btn-sm" type="button" id="cancel">Cancel</button>
+       	</div>
+	   </div>
 		</div></div>
-     <div class="row">
-          <button class="btn btn-success  btn-sm" name="register"  >Register</button>
-        
-          <button class="btn btn-warning  btn-sm" type="button" id="cancel">Cancel</button>
-       
-     </div>
 	 </form>
 			</div>
 		</div>
