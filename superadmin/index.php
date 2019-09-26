@@ -14,15 +14,14 @@ include("adminheader.php");
 			<div class="col-md-3">
 				<select class="form-control">
 					<option>Select Year</option>
-					<option>1995</option>
-					<option>1996</option>
-					<option>1997</option>
-					<option>1998</option>
-					<option>1999</option>
-					<option>2001</option>
-					<option>2002</option>
-					<option>2003</option>
-					<option>2004</option>
+          <?php
+           $y=date("Y");
+           $start=2015;
+           for ($i=(int)$y; $i >=$start; $i--) { 
+             echo "<option>".$i ."</option>";
+           }
+
+           ?>
 				</select><br>
 							
 			</div>
