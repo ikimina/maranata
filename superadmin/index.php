@@ -1,6 +1,4 @@
-<?php
 
-?>
 <?php
 include("adminheader.php");
 
