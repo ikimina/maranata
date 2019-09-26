@@ -1,12 +1,18 @@
 
 <?php
 include("usersheader.php");
+require_once("../includes/dbconnect.php");
+
+require_once("../includes/classes/user.php");
+$userLoggedIn=new User($con,$_SESSION['user']) ;
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Maranata-<?php echo  $_SESSION["user"]?> | Dashboard</title>
+
+	<title>Maranata-<?php echo  $userLoggedIn->getFname();?> | Dashboard</title>
+
 </head>
 <body><br>
 <div class="container">
@@ -74,7 +80,7 @@ include("usersheader.php");
 		<div class="card">
 			<div class="card-header alert alert-success" style="margin-bottom: -1px !important;">
 			<center>
-			Informations about you  <b><?php echo  $_SESSION["user"]?></b>
+			Informations about you  <b><?php echo   $userLoggedIn->getFname();?></b>
 			</center>
 			</div>
 			<div class="card-body">
