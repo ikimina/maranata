@@ -1,9 +1,5 @@
 <?php
-session_start();
-
- include("adminheader.php");
-
-
+include("adminheader.php");
 include "../includes/dbconnect.php";
 require_once("../includes/classes/Constants.php"); 
 require_once("../includes/classes/FormSanitizer.php"); 
@@ -67,7 +63,7 @@ $rows = $con->query($sql)->fetchColumn();
 ?>
 <br>
  <div class="container-fluid">
-<button class="btn btn-primary" id="showUserList">Registered Members</button><a href="registration.php"><button id="newMember" class="btn btn-primary" style="display: none;">New Members</button></a>
+<button class="btn btn-primary btn-sm" id="showUserList">Registered Members</button><a href="registration.php"><button id="newMember" class="btn btn-primary" style="display: none;">New Members</button></a>
 	<div class="card"  id="registrationForm">
     <?php
     if (isset($_GET['r'])) {
@@ -118,7 +114,27 @@ $rows = $con->query($sql)->fetchColumn();
        <span class="input-group-text" id="basic-addon3">Date Of Birth</span>
       </div>
       <input type="date" class="form-control" name="age"   min='1910-01-01' max='2010-01-01' value="<?php getInputValue('age'); ?>">
-       </div>
+       </div><br>
+      <div class="row">
+        <div class="col-md-4">
+          <label class="form-control">Member Pic</label>
+        </div>
+        <div class="col-md-8">
+          <input type="file" name="" class="form-control">
+        </div>
+      </div><br>
+
+        <div class="row">
+        <div class="col-md-4">
+          <label class="form-control">Upload signature</label>
+        </div>
+        <div class="col-md-8">
+          <input type="file" name="" class="form-control">
+        </div>
+      </div>
+
+
+    
 				</div>
 				<div class="col-md-6">
 				<center><h5 class="alert alert-success">Adress info</h5></center>
@@ -176,7 +192,19 @@ $rows = $con->query($sql)->fetchColumn();
        <span class="input-group-text" id="basic-addon3">Telephone</span>
       </div>
       <input type="number" class="form-control" name="phone" min="0">
-    </div><br>
+    </div>
+   <center> <p class="alert alert-success">Bank info</p></center>
+     <div class="input-group">
+    <select class="form-control">
+      <option>Select Bank</option>
+      <option>BK</option>
+      <option>Equity</option>
+      <option>BPR</option>
+      <option>I&M</option>
+    </select>&nbsp
+  <input type="text" aria-label="First name" class="form-control" placeholder="Name on account">&nbsp
+  <input type="text" aria-label="Last name" class="form-control" placeholder="Acoount number">
+  </div><br>
        <div class="row">
        	<div class="col-md-6">
        		<button class="btn btn-success btn-block btn-sm" name="register" >Register</button>

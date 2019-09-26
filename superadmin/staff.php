@@ -187,7 +187,7 @@ foreach ($q1 as $row) {
           <?php echo $out; ?>
 				</table>
 
-  <center> <b><?php echo $textline1; ?> Customer in Archive</b></center>
+  <center> <b><?php echo $textline1; ?> Staff in Archive</b></center>
   <p><?php echo $textline2; ?></p>
   <div id="pagination_controls"><?php echo $paginationCtrls; ?></div><br>
 
