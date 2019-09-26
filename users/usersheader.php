@@ -1,5 +1,6 @@
 <?php
 include ("../includes/header.php");
+session_start();
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="6") {
 
     header("location: ../index.php"); 

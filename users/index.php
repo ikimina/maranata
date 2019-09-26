@@ -1,10 +1,5 @@
 <?php
 include("usersheader.php");
-
-
- echo  $_SESSION["user"].
-       $_SESSION["role"]; 
-
 ?>
 
 <!DOCTYPE html>
