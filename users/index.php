@@ -6,9 +6,9 @@ include("usersheader.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Maranata-<?php echo  $_SESSION["user"]?> | Dashboard</title>
+<title>Maranata-<?php echo  $_SESSION["user"]?> | Dashboard</title>
 </head>
-<body>
+<body><br>
 <div class="container">
  <div class="row">
  	<div class="col-md-4">
