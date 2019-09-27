@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="5") {
 
     header("location: ../index.php"); 
@@ -12,7 +13,7 @@ include ("../includes/header.php");
 
 <body>
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg" style="" >
+<nav class="mb-1 navbar navbar-expand-xl sticky-top" style="" >
   <a class="navbar-brand" href="index.php">Maranata</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +34,7 @@ include ("../includes/header.php");
         <a class="nav-link" href="staff.php">Staff</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#">Credit</a>
+        <a class="nav-link" href="#">Loans</a>
       </li>
         <li class="nav-item">
         <a class="nav-link" href="#">Debit</a>
@@ -43,17 +44,13 @@ include ("../includes/header.php");
 
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span>User</span></i> 
+
+        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout". $_SESSION["user"]; ?></span></i> 
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>
 
 <!-- &nbsp&nbsp&nbsp --> 
-             
-      <li class="nav-item">
-      <a class="nav-link" href="admin.php">Logout</a>
-      </li>
     </ul>
   </div>
 </nav>

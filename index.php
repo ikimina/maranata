@@ -1,4 +1,5 @@
 <?php
+session_start();
 include "includes/header.php";
 include "includes/dbconnect.php";
 require_once("includes/classes/Constants.php"); 
@@ -65,6 +66,7 @@ function getInputValue($name) {
 }
 
 ?>
+<div></div>
 <div class="container">
         <div class="row all">
         <div class="head"><div class="row">
