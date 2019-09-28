@@ -175,14 +175,14 @@ $rows = $con->query($sql)->fetchColumn();
       
         <center><h5 class="alert alert-success">Other info</h5></center>
         <select class="form-control" name="bank" id="province" >
-            <option ></option>
+            <option selected disabled>Select your bank</option>
             <option value="Bank Of Kigali">Bank Of Kigali</option>
             <option value="BPR">BPR</option>
             <option value="Equity">Equity</option>
             <option value="Sacco">Sacco</option>
-            <option value="Git Bank">Git Bank</option>
+            <option value="GT Bank">GT Bank</option>
 
-          </select>
+          </select><br>
       
       <input type="text" class="form-control" name="bankaccount" min="0" placeholder="Account Number"><br>
       <input type="text" class="form-control" name="accountowner" min="0" placeholder="Account Owner"><br>
