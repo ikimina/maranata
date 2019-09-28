@@ -210,17 +210,16 @@ class Account {
         }
     }
   public function insertCredention($uid,$username,$type)
-  {
+
+  {    $password="00000";
        $query = $this->con->prepare("INSERT INTO credential(user_id, username, password,type)
                                     VALUES (:uid, :username, :password, :type)") ;          
-
+      
         $query->bindParam(":uid", $uid);
         $query->bindParam(":username", $username);
         $query->bindParam(":password", $password);
          $query->bindParam(":type", $type);
 
-        
-        $password="00000";
         if ($query->execute()) {
             return true;
         }
@@ -237,9 +236,65 @@ class Account {
      $fileActualExt1=strtolower(end($fileExt1));
      if (in_array($fileActualExt1, $allowed)) {
       $newname1 =$fileExt1[0].uniqid('',true).".".$fileActualExt1;
-       $fileDestination1='../images/staff/'.$newname1;
-      if(move_uploaded_file( $file['tmp_name'],$fileDestination1)){
-        return  $fileDestination1;
+       $saveto='../images/staff/'.$newname1;
+      if(move_uploaded_file( $file['tmp_name'],$saveto)){
+          /*Here we may think about the compression  algorithm in case the picture is bigger!
+          to reduce too much use of storage*/
+/*          
+$filetype=$_FILES['image']['type'];
+if($filetype=="image/gif") $ext=".gif";
+if($filetype=="image/jpeg") $ext=".jpeg";
+if($filetype=="image/pjpeg") $ext=".jpeg";
+if($filetype=="image/png") $ext=".png";
+$saveto = "public/profile/$user".$ext;
+move_uploaded_file($_FILES['image']['tmp_name'], $saveto);
+$typeok = TRUE;
+switch($_FILES['image']['type'])
+{
+case "image/gif": $src = imagecreatefromgif($saveto); break;
+case "image/jpeg":
+case "image/pjpeg": $src = imagecreatefromjpeg($saveto); break;
+case "image/png": $src = imagecreatefrompng($saveto); break;
+default: $typeok = FALSE; break;
+}
+if ($typeok)
+  {
+  list($w, $h) = getimagesize($saveto);
+  $max = 640;
+  $tw = $w;
+  $th = $h;
+  if ($w > $h && $max < $w)
+  {
+  $th = $max / $w * $h;
+  $tw = $max;
+  }
+  elseif ($h > $w && $max < $h)
+  {
+  $tw = $max / $h * $w;
+  $th = $max;
+  }
+  elseif ($max < $w)
+  {
+  $tw = $th = $max;
+  }
+  $tmp = imagecreatetruecolor($tw, $th);
+  imagecopyresampled($tmp, $src, 0, 0, 0, 0, $tw, $th, $w, $h);
+  imageconvolution($tmp, array(array(-1, -1, -1),
+  array(-1, 16, -1), array(-1, -1, -1)), 8, 0);
+  if($ext==".gif"){
+    imagegif($tmp,$saveto);
+  }
+  elseif($ext==".png"){
+    imagepng($tmp,$saveto);
+  }
+  elseif($ext==".jpg" || $ext==".jpeg"){
+  imagejpeg($tmp, $saveto);
+  }
+  imagedestroy($tmp);
+  imagedestroy($src);
+  }
+  */
+        return  $saveto;
       } 
      }
        else{
