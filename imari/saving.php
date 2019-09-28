@@ -1,7 +1,7 @@
+
 <?php 
 session_start();
 include("imariheader.php");
-
 
 include "../includes/dbconnect.php";
 require_once("../includes/classes/Constants.php"); 
@@ -34,17 +34,15 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
 <div class="card" style="box-shadow: none;">
   <div class="card-body">
 <div class="container">
-	<center><u>SAVING DETAILS</u></center><br>
-  <label>Amount </label>
+	<center><p class="alert alert-info">SAVING DETAILS</p></center>
   <span id="error" style="color: red;"></span>
 
-  	<input type="number" name="" class="form-control" placeholder="Amount" id="ammount" min="1000">
-<br>
-  	
+  	<input type="number" name="" class="form-control" placeholder="Amount" id="ammount" min="1000"><br>
+	
   	<textarea class="form-control"  placeholder="Comment" id="comment">
   		
-  	</textarea><br>
-    <span id="saveRes" style="color: green"></span><br>
+  	</textarea>
+    <span id="saveRes" style="color: green"></span>
     <button class="btn btn-sm btn-default" onclick="saveTranscation()">Save and print </button>
   </div>
   </div>
