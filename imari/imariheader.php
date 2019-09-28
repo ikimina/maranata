@@ -48,8 +48,9 @@ $staffLoggedIn= new Staff($con,$_SESSION["user"]);
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
         <a href="../logout.php" class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php 
-        //echo "Logout  ".  $userLoggedIn->getFname()?> </span></i></a>
+
+        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout  ".$username?> </span></i></a>
+
       </li>
 
 <!-- &nbsp&nbsp&nbsp -->         
