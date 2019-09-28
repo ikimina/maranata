@@ -1,6 +1,5 @@
 
 <?php
-
 include ("../includes/header.php");
 include ("../includes/dbconnect.php");
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="1") {
@@ -23,7 +22,7 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
   <a class="navbar-brand" href="index.php">Maranata</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class=""><i class="fa fa-bars"></i></span>
   </button> 
   <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
    <ul class="navbar-nav mr-auto">
@@ -44,13 +43,8 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
 
-        <a class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo  $userLoggedIn->getFname()?> </span></i> 
-
         <a href="../logout.php" class="nav-link waves-effect waves-light">
-        Logout
-          <!-- &nbsp&nbsp&nbsp&nbsp | -->
-        </a>
+        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout  ".  $userLoggedIn->getFname()?> </span></i></a>
       </li>
 
 <!-- &nbsp&nbsp&nbsp -->         

@@ -65,24 +65,20 @@ function getInputValue($name) {
     }
 }
 
-?>
-<div></div>
-<div class="container">
+?><body>
+<div class="containe" style="height: 300px; margin: 1px 1px 1px;">
+  <img  src="images/logo.jpg" style="width: 100%; height:100%;z-index:-1;position:relative;">
+</div>
+<div class="container" style="margin-top: -200px;z-index:1000;position:relative;">
         <div class="row all">
         <div class="head"><div class="row">
           <div class="col-md-3"></div>
 <div class="col-md-8">
-           <div class="col-xl-5 col-md-5 mb-3 text-center">
-
-    <img src="images/logo.jpg" class="img-fluid z-depth-1 rounded-circle"
-      alt="Responsive image">
-
-  </div>
  
             </div><div class="col-md-1"></div>
           </div>
         </div>
-            <div class="col-md-5 use">
+            <div class="col-md-5 use" style="background-color: white;">
            
                 <form action="index.php" method="POST">
                     <div class="text-center">
@@ -102,6 +98,7 @@ function getInputValue($name) {
         </div>
 </div>
 </div>
+</body>
 <style>
 .signInMessage {
     font-size: 14px;

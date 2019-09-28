@@ -27,7 +27,7 @@ $username= $_SESSION["user"];
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="credits.php">About Credit</a>
+        <a class="nav-link" href="credits.php">About Loans</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="transaction.php">History</a>

@@ -6,7 +6,7 @@ include("colheader.php");
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Maranata-<?php echo $_SESSION['user']?> | Credits</title>
+	<title>Maranata-<?php echo $_SESSION['user']?> | Loans</title>
 </head>
 <body>
 <div class="continer-fluid">

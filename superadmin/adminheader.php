@@ -45,7 +45,7 @@ include ("../includes/header.php");
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
 
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout". $_SESSION["user"]; ?></span></i> 
+        <a href="../logout.php"><i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout    ". $_SESSION["user"]; ?></span></i> 
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>
