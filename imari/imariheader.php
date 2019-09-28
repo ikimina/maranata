@@ -42,6 +42,10 @@ $staffLoggedIn= new Staff($con,$_SESSION["user"]);
       <li class="nav-item">
         <a class="nav-link" href="saving.php">Saving</a>
       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="loan.php">Loan</a>
+      </li>
+
 
     </ul>
 

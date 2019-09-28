@@ -28,7 +28,7 @@ class Account {
             return false;
         }
     }
-    public function register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email) {
+    public function register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email,$signature,$accountName,$accountNumber,$bankName) {
         
         $this->validateFirstName($firstName);
         $this->validateLastName($lastName);
@@ -38,13 +38,16 @@ class Account {
         $this->validateMerital($merital);
         $this->validateEmails($email);
          if ($type!=null && empty($this->errorArray)) {
-
+            $location= $this->uploadPicture($file);
             $this->validatePhoneAdmin($phone);
-           $location= $this->uploadPicture($file);
+           
              return $this->insertStaffDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$location,$email);
           }
+        
         if(empty($this->errorArray)) {
-            return $this->insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village);
+        $signatureLocation= $this->uploadSignaturePicture($signature);
+        $location= $this->uploadPicture($file);
+            return $this->insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$location,$accountNumber,$accountName,$bankName,$signatureLocation);
         }
         else {
             return false;
@@ -85,11 +88,11 @@ class Account {
          }
 
     }
-    public function insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village) {
+    public function insertUserDetails($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$location,$accountNumber,$accountName,$bankName,$signature) {
 
-        $query = $this->con->prepare("INSERT INTO members (
-   fname, lname, sex, district, sector, cell, village, province, dob, phone,  active)
-    VALUES (:fn, :ln, :sex, :district, :sector, :cell, :village, :province, :dob, :phone, :active)");
+        $query = $this->con->prepare("INSERT INTO members (fname, lname, sex, district, sector, cell, village, province, dob, phone, active, profilepic, signature, bank, accountname, accountnumber)
+    VALUES (:fn, :ln, :sex, :district, :sector, :cell, :village, :province, :dob, :phone, :active,:profilepic,:signature,:bank,:accountname,:accountnumber
+  )");
                              $active="yes" ;          
 
         $query->bindParam(":fn", $firstName);
@@ -103,6 +106,11 @@ class Account {
         $query->bindParam(":province", $province);
         $query->bindParam(":dob", $dob);
         $query->bindParam(":active", $active);
+        $query->bindParam(":profilepic", $location);
+        $query->bindParam(":signature", $signature);
+        $query->bindParam(":bank", $bankName);
+        $query->bindParam(":accountname", $accountName);
+        $query->bindParam(":accountnumber", $accountNumber);
          if ($query->execute()) {
            
         return $this->insertCredention($this->con->lastInsertId(),$phone,"6");;
@@ -238,62 +246,7 @@ class Account {
       $newname1 =$fileExt1[0].uniqid('',true).".".$fileActualExt1;
        $saveto='../images/staff/'.$newname1;
       if(move_uploaded_file( $file['tmp_name'],$saveto)){
-          /*Here we may think about the compression  algorithm in case the picture is bigger!
-          to reduce too much use of storage*/
-/*          
-$filetype=$_FILES['image']['type'];
-if($filetype=="image/gif") $ext=".gif";
-if($filetype=="image/jpeg") $ext=".jpeg";
-if($filetype=="image/pjpeg") $ext=".jpeg";
-if($filetype=="image/png") $ext=".png";
-$saveto = "public/profile/$user".$ext;
-move_uploaded_file($_FILES['image']['tmp_name'], $saveto);
-$typeok = TRUE;
-switch($_FILES['image']['type'])
-{
-case "image/gif": $src = imagecreatefromgif($saveto); break;
-case "image/jpeg":
-case "image/pjpeg": $src = imagecreatefromjpeg($saveto); break;
-case "image/png": $src = imagecreatefrompng($saveto); break;
-default: $typeok = FALSE; break;
-}
-if ($typeok)
-  {
-  list($w, $h) = getimagesize($saveto);
-  $max = 640;
-  $tw = $w;
-  $th = $h;
-  if ($w > $h && $max < $w)
-  {
-  $th = $max / $w * $h;
-  $tw = $max;
-  }
-  elseif ($h > $w && $max < $h)
-  {
-  $tw = $max / $h * $w;
-  $th = $max;
-  }
-  elseif ($max < $w)
-  {
-  $tw = $th = $max;
-  }
-  $tmp = imagecreatetruecolor($tw, $th);
-  imagecopyresampled($tmp, $src, 0, 0, 0, 0, $tw, $th, $w, $h);
-  imageconvolution($tmp, array(array(-1, -1, -1),
-  array(-1, 16, -1), array(-1, -1, -1)), 8, 0);
-  if($ext==".gif"){
-    imagegif($tmp,$saveto);
-  }
-  elseif($ext==".png"){
-    imagepng($tmp,$saveto);
-  }
-  elseif($ext==".jpg" || $ext==".jpeg"){
-  imagejpeg($tmp, $saveto);
-  }
-  imagedestroy($tmp);
-  imagedestroy($src);
-  }
-  */
+          
         return  $saveto;
       } 
      }
@@ -301,4 +254,33 @@ if ($typeok)
          array_push($this->errorArray, Constants::$invaliImage);
          return;
        }
-}} ?>
+}
+
+ public function uploadSignaturePicture($file)
+  {
+     $allowed=array('gif','jpg','jpeg','png');
+     $fileName1=$file['name'];
+     $fileExt1=explode('.', $fileName1);
+     $fileActualExt1=strtolower(end($fileExt1));
+     if (in_array($fileActualExt1, $allowed)) {
+      $newname1 =$fileExt1[0].uniqid('',true).".".$fileActualExt1;
+       $saveto='../images/signature/'.$newname1;
+      if(move_uploaded_file( $file['tmp_name'],$saveto)){
+          
+        return  $saveto;
+      } 
+     }
+       else{
+         array_push($this->errorArray, Constants::$invaliImage);
+         return;
+       }
+}
+
+
+
+
+
+
+
+
+} ?>

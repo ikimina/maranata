@@ -41,7 +41,7 @@ $transaction=new Transaction($con,$_SESSION['user']) ;
         <a class="nav-link" href="transaction.php">Transaction </a>
       </li>
         <li class="nav-item">
-        <a class="nav-link" href="notification.php">Notification <span class="badge badge-info">3</span></a>
+        <a class="nav-link" href="loan.php">Notification <span class="badge badge-info">3</span></a>
       </li>
 
     </ul>

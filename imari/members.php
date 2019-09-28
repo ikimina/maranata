@@ -25,31 +25,16 @@ if(isset($_POST["register"])) {
     $sector = FormSanitizer::sanitizeFormString($_POST["sector"]);
     $cell = FormSanitizer::sanitizeFormString($_POST["cell"]);
     $village = FormSanitizer::sanitizeFormString($_POST["village"]);
+    $memberpic=$_FILES['memberpic'];
+    $signature=$_FILES['singnaturepic'];
+    $bankName=$_POST['bankname'];
+    $accountName = FormSanitizer::sanitizeFormAccountName($_POST["accountname"]);
+    $accountNumber = FormSanitizer::sanitizeFormAccountNumber($_POST["accountnumber"]);
 
-    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,null,null,null);
+    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,null,$memberpic,null,$signature,$accountName,$accountNumber,$bankName);
 
-    if(is_array($wasSuccessful)) {
-      $query = $con->prepare("INSERT INTO credential(user_id, username, password,type)
-                                    VALUES (:uid, :username, :password, :type)") ;          
-
-        $query->bindParam(":uid", $uid);
-        $query->bindParam(":username", $username);
-        $query->bindParam(":password", $password);
-         $query->bindParam(":type", $type);
-
-        $uid= $wasSuccessful[0];
-        $username=$wasSuccessful[1];
-        $password="00000";
-        $type=$wasSuccessful[2];
-        if ($query->execute()) {
-          $_SESSION["userLoggedIn"] = $username;
-          echo "<script>alert('Done')</script>";
-        }
-        else{
-           echo "<script>alert('failed')</script>";
-        }
-        
-     
+    if ($wasSuccessful) {
+      echo "<script>alert('Done');</script>";
     }
 
 }
@@ -82,7 +67,7 @@ $rows = $con->query($sql)->fetchColumn();
       <?php     } ?>
     <div class="card-header">User Registration</div>
     <div class="card-body">
-    <form method="POST" action="registration.php">
+    <form method="POST" action="members.php" enctype="multipart/form-data">
       <div class="row">
 
         <div class="col-md-6">
@@ -125,15 +110,15 @@ $rows = $con->query($sql)->fetchColumn();
        </div>
            <div class="input-group mb-3">
       <div class="input-group-prepend">
-       <span class="input-group-text" id="basic-addon3">Member picture&nbsp&nbsp</span>
+       <span class="input-group-text" id="basic-addon3" >Member picture&nbsp&nbsp</span>
       </div>
-      <input type="file" class="form-control" name="">
+      <input type="file" class="form-control" name="memberpic">
        </div>
            <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">Signature picture</span>
       </div>
-      <input type="file" class="form-control" name="">
+      <input type="file" class="form-control" name="singnaturepic">
        </div>
         </div>
         <div class="col-md-6">
@@ -187,7 +172,7 @@ $rows = $con->query($sql)->fetchColumn();
       
         <center><h5 class="alert alert-success">Bank info</h5></center>
       
-            <select class="form-control" name="" id="" >
+            <select class="form-control" name="bankname" id="" >
             <option selected disabled>Select your bank</option>
             <option value="Bank Of Kigali">Bank Of Kigali</option>
             <option value="BPR">BPR</option>
@@ -197,8 +182,8 @@ $rows = $con->query($sql)->fetchColumn();
 
           </select>&nbsp
           <div class="input-group mb-3">
-        <input class="form-control" type="text" name="" placeholder="Account Owner">&nbsp
-         <input class="form-control" type="text" name="" placeholder="Account Number">
+        <input class="form-control" type="text" name="accountname" placeholder="Account Owner" >&nbsp
+         <input class="form-control" type="text" name="accountnumber" placeholder="Account Number">
        </div><br>
      <div class="row">
      <div class="col-md-6">

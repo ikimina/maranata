@@ -30,6 +30,16 @@ class FormSanitizer {
         $inputText = str_replace(" ", "", $inputText);
         return $inputText;
     }
+    public static function sanitizeFormAccountName($inputText) {
+        $inputText = strip_tags($inputText);
+        $inputText = str_replace(" ", "", $inputText);
+        return $inputText;
+    }
+     public static function sanitizeFormAccountNumber($inputText) {
+        $inputText = strip_tags($inputText);
+        $inputText = str_replace(" ", "", $inputText);
+        return $inputText;
+    }
 
 }
 ?>

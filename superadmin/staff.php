@@ -31,7 +31,7 @@ if (isset($_POST['register'])) {
     $type=@$_POST["type"];
     $file=$_FILES["pic"];
  
-    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email);
+    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email,null,null,null,null);
 
     if($wasSuccessful) {
                                 
