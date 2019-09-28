@@ -1,5 +1,5 @@
 <?php
-
+session_start();
  include("imariheader.php");
 
 
@@ -123,6 +123,18 @@ $rows = $con->query($sql)->fetchColumn();
       </div>
       <input type="date" class="form-control" name="age"   min='1910-01-01' max='2010-01-01' value="<?php getInputValue('age'); ?>">
        </div>
+           <div class="input-group mb-3">
+      <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">Member picture&nbsp&nbsp</span>
+      </div>
+      <input type="file" class="form-control" name="">
+       </div>
+           <div class="input-group mb-3">
+      <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">Signature picture</span>
+      </div>
+      <input type="file" class="form-control" name="">
+       </div>
         </div>
         <div class="col-md-6">
         <center><h5 class="alert alert-success">Adress info</h5></center>
@@ -173,8 +185,9 @@ $rows = $con->query($sql)->fetchColumn();
       <input type="text" class="form-control" name="village" >
      </div>
       
-        <center><h5 class="alert alert-success">Other info</h5></center>
-        <select class="form-control" name="bank" id="province" >
+        <center><h5 class="alert alert-success">Bank info</h5></center>
+      
+            <select class="form-control" name="" id="" >
             <option selected disabled>Select your bank</option>
             <option value="Bank Of Kigali">Bank Of Kigali</option>
             <option value="BPR">BPR</option>
@@ -182,17 +195,26 @@ $rows = $con->query($sql)->fetchColumn();
             <option value="Sacco">Sacco</option>
             <option value="GT Bank">GT Bank</option>
 
-          </select><br>
-      
-      <input type="text" class="form-control" name="bankaccount" min="0" placeholder="Account Number"><br>
-      <input type="text" class="form-control" name="accountowner" min="0" placeholder="Account Owner"><br>
-    </div></div>
+          </select>&nbsp
+          <div class="input-group mb-3">
+        <input class="form-control" type="text" name="" placeholder="Account Owner">&nbsp
+         <input class="form-control" type="text" name="" placeholder="Account Number">
+       </div><br>
      <div class="row">
-          <button class="btn btn-success  btn-sm" name="register"  >Register</button>
-        
-          <button class="btn btn-warning  btn-sm" type="button" id="cancel">Cancel</button>
+     <div class="col-md-6">
+        <button class="btn btn-success btn-block  btn-sm" name="register"  >Register</button>
+     </div>
+         
+      <div class="col-md-6">
+      <button class="btn btn-warning btn-block  btn-sm" type="button" id="cancel">Cancel</button>
+      </div>  
+     
        
      </div>
+    </div>
+   
+    </div>
+
    </form>
       </div>
     </div>
