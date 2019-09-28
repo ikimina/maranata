@@ -1,7 +1,10 @@
 
 <?php
+//session_start();
 include ("../includes/header.php");
 include ("../includes/dbconnect.php");
+require_once '../includes/classes/user.php';
+require_once '../includes/classes/staff.php';
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="1") {
 
     header("location: ../index.php"); 
@@ -9,7 +12,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !="1") {
 } 
 $username= $_SESSION["user"];
 
-
+$staffLoggedIn= new Staff($con,$_SESSION["user"]);
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +48,8 @@ $username= $_SESSION["user"];
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
         <a href="../logout.php" class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout  ".  $userLoggedIn->getFname()?> </span></i></a>
+        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php 
+        //echo "Logout  ".  $userLoggedIn->getFname()?> </span></i></a>
       </li>
 
 <!-- &nbsp&nbsp&nbsp -->         

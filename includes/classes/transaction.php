@@ -3,6 +3,7 @@
 /**
  * eric
  */
+require_once ("user.php");
 class Transaction
 {
 	
@@ -98,11 +99,73 @@ foreach ($q1 as $row) {
           return $dataString ;
 	}
 	
-	public function getAllTransaction()
+	public function getAllTransaction($rpp, $pn,$last)
 	{
-		
+
+ if ($pn < 1) { 
+      $pn = 1; 
+  } else if ($pn > $last) { 
+      $pn = $last; 
+  }
+ 
+$a=($pn - 1) * $rpp;
+
+$sql1 = "SELECT * FROM transactions LIMIT $rpp OFFSET $a";
+$q1=$this->con->query($sql1);
+
+ $dataString = "<table class='table table-stipped '>
+          <tr>
+          <th>No</th>
+                    	<th>Date</th>
+                    	<th>Names</th>
+                    	<th>Amount</th>
+                    	<th>Action</th></tr>
+         <tr >";
+$i=1;
+
+foreach ($q1 as $row) {
+	$user=new User($this->con,$row['user_phone']);
+    
+     $dataString .='<tr> <td>'.$i++.'</td>
+    <td>'.$row['done_on'].'</td>
+    <td>'.$user->getNames().'</td><td>'
+    .$row['amount'].'</td><td>'.$row['actions']."</td></tr>";
+  }
+   
+ 
+          return $dataString ;
 	}
 
-}
 
+
+public function getTotalBalance()
+	{
+		return $this->totalSaving() - $this->totalExpence();
+	}
+    public function totalSaving(){
+
+        $query = $this->con->prepare("SELECT amount FROM transactions WHERE  tr_id='1'");
+
+        $query->execute();
+        $total=0;
+        foreach ($query as $row) {
+         $total=$total + (int) $row['amount'];
+
+        }
+
+    	return $total;
+    }
+    public function totalExpence(){
+
+        $query = $this->con->prepare("SELECT amount FROM transactions WHERE  tr_id='0'");
+        
+        $query->execute();
+        $total=0;
+        foreach ($query as $row) {
+         $total=$total + (int) $row['amount'];
+
+        }
+
+    	return $total;
+    }}
 ?>

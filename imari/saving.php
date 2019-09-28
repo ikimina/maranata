@@ -1,4 +1,6 @@
-<?php include("imariheader.php");
+<?php 
+session_start();
+include("imariheader.php");
 
 
 include "../includes/dbconnect.php";
