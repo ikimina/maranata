@@ -1,6 +1,6 @@
 
 <?php
-
+session_start();
 include ("../includes/header.php");
 include ("../includes/dbconnect.php");
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="1") {
@@ -10,8 +10,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !="1") {
 } 
 $username= $_SESSION["user"];
 
-require_once("../includes/classes/user.php");
-$userLoggedIn=new User($con,$_SESSION['user']) ;
+
 
 ?>
 <!DOCTYPE html>
@@ -38,6 +37,9 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
        <li class="nav-item">
         <a class="nav-link" href="transaction.php">Transaction</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="saving.php">Saving</a>
+      </li>
 
     </ul>
 
@@ -45,8 +47,8 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
           <li class="nav-item">
 
         <a class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo  $userLoggedIn->getFname()?> </span></i> 
-
+        <i class="fa fa-user" aria-hidden="true"></i> <span><?php echo  $username?> </span></a></li>
+ <li class="nav-item">
         <a href="../logout.php" class="nav-link waves-effect waves-light">
         Logout
           <!-- &nbsp&nbsp&nbsp&nbsp | -->

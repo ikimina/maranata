@@ -1,5 +1,4 @@
 <?php
-session_start();
 
  include("imariheader.php");
 
@@ -9,7 +8,7 @@ require_once("../includes/classes/Constants.php");
 require_once("../includes/classes/FormSanitizer.php"); 
 require_once("../includes/classes/Account.php");
 require_once("../includes/classes/user.php");
-
+$userLoggedIn=new User($con,$_SESSION['user']) ;
 $account = new Account($con);
 
 if(isset($_POST["register"])) {
