@@ -9,8 +9,7 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !="1") {
 } 
 $username= $_SESSION["user"];
 
-require_once("../includes/classes/user.php");
-$userLoggedIn=new User($con,$_SESSION['user']) ;
+
 
 ?>
 <!DOCTYPE html>
@@ -37,12 +36,14 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
        <li class="nav-item">
         <a class="nav-link" href="transaction.php">Transaction</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="saving.php">Saving</a>
+      </li>
 
     </ul>
 
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
-
         <a href="../logout.php" class="nav-link waves-effect waves-light">
         <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout  ".  $userLoggedIn->getFname()?> </span></i></a>
       </li>

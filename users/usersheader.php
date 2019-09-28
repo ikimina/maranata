@@ -7,6 +7,13 @@ if (!isset($_SESSION["role"]) || $_SESSION["role"] !="6") {
     exit();
 } 
 $username= $_SESSION["user"];
+
+include '../includes/dbconnect.php';
+
+require_once("../includes/classes/user.php");
+require_once("../includes/classes/transaction.php");
+$userLoggedIn=new User($con,$_SESSION['user']) ;
+$transaction=new Transaction($con,$_SESSION['user']) ;
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +35,7 @@ $username= $_SESSION["user"];
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="credits.php">Credit <span class="badge badge-warning">00000</span></a>
+        <a class="nav-link" href="credits.php">Loan <span class="badge badge-warning">00000</span></a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="transaction.php">Transaction </a>
@@ -40,9 +47,15 @@ $username= $_SESSION["user"];
     </ul>
 
        <ul class="navbar-nav ml-auto nav-flex-icons">
+        <li class="nav-item">
+        <a href="../logout.php" class="nav-link waves-effect waves-light">
+        Balance&nbsp;&nbsp;<span style="color: green;"><b><?php echo  $transaction->getBalance()?> </b>Rwf</span></i> 
+          <!-- &nbsp&nbsp&nbsp&nbsp | -->
+      </a>
+      </li>
           <li class="nav-item">
         <a href="../logout.php" class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout  ".$_SESSION["user"]?> </span></i> 
+        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; <span><?php echo  $userLoggedIn->getFname()?> </span>
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>

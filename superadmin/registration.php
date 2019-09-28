@@ -1,14 +1,14 @@
 <?php
+session_start();
 
- include("imariheader.php");
+ include("adminheader.php");
 
 
 include "../includes/dbconnect.php";
 require_once("../includes/classes/Constants.php"); 
 require_once("../includes/classes/FormSanitizer.php"); 
 require_once("../includes/classes/Account.php");
-require_once("../includes/classes/user.php");
-$userLoggedIn=new User($con,$_SESSION['user']) ;
+
 $account = new Account($con);
 
 if(isset($_POST["register"])) {
@@ -68,7 +68,7 @@ $rows = $con->query($sql)->fetchColumn();
 <br>
  <div class="container-fluid">
 <button class="btn btn-primary" id="showUserList">Registered Members</button><a href="registration.php"><button id="newMember" class="btn btn-primary" style="display: none;">New Members</button></a>
-  <div class="card"  id="registrationForm">
+	<div class="card"  id="registrationForm">
     <?php
     if (isset($_GET['r'])) {
       ?>
@@ -80,54 +80,50 @@ $rows = $con->query($sql)->fetchColumn();
   </button>
 </div>
       <?php     } ?>
-    <div class="card-header">User Registration</div>
-    <div class="card-body">
-    <form method="POST" action="registration.php">
-      <div class="row">
+		<div class="card-header">User Registration</div>
+		<div class="card-body">
+		<form method="POST" action="registration.php">
+			<div class="row">
 
-        <div class="col-md-6">
+				<div class="col-md-6">
 
-        <center><h5 class="alert alert-success">Basic info</h5></center>
-            
+				<center><h5 class="alert alert-success">Basic info</h5></center>
+				    
                 <?php echo $account->getError(Constants::$firstNameCharacters); ?>
-          <input class="form-control" type="text" name="fname" placeholder="First Name" value="<?php getInputValue('fname'); ?>"><br>
+					<input class="form-control" type="text" name="fname" placeholder="First Name" value="<?php getInputValue('fname'); ?>"><br>
            <?php echo $account->getError(Constants::$lastNameCharacters); ?>
-          <input class="form-control" type="text" name="lname" placeholder="Last Name" value="<?php getInputValue('lname'); ?>"><br>
+					<input class="form-control" type="text" name="lname" placeholder="Last Name" value="<?php getInputValue('lname'); ?>"><br>
            <?php echo $account->getError(Constants::$IdInvalid); ?>
             <?php echo $account->getError(Constants::$IdNotAlphanumeric); ?>
-          <input class="form-control" type="text" name="idno" min="1" placeholder="ID Number" value="<?php getInputValue('idno'); ?>"><br>
-                 <?php echo $account->getError(Constants::$PhoneInvalid); ?>
-           <?php echo $account->getError(Constants::$usernameTaken); ?>
-    
-      <input type="number" class="form-control" name="phone" min="0" placeholder="Telephone"><br>
-   
+					<input class="form-control" type="text" name="idno" min="1" placeholder="ID Number" value="<?php getInputValue('idno'); ?>"><br>
+
            <?php echo $account->getError(Constants::$SelectSex); ?>
-          <select class="form-control" name="sex">
-          <option selected disabled>Select Gender</option>
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select><br>
+					<select class="form-control" name="sex">
+					<option selected disabled>Select Gender</option>
+						<option value="M">Male</option>
+						<option value="F">Female</option>
+					</select><br>
            <?php echo $account->getError(Constants::$SelectMeritalStatus); ?>
-          <select class="form-control" name="mStatus">
-          <option selected disabled>Select Marital Status</option>
-            <option value="Single">Single</option>
-            <option value="Married">Married</option>
-            <option value="Divorced">Divorced</option>
-            <option value="Widow">Widow</option>
-            <option value="Other">Other</option>
-          </select>
-          <br>
-    <div class="input-group mb-3">
+					<select class="form-control" name="mStatus">
+					<option selected disabled>Select Marital Status</option>
+						<option value="Single">Single</option>
+						<option value="Married">Married</option>
+						<option value="Divorced">Divorced</option>
+						<option value="Widow">Widow</option>
+						<option value="Other">Other</option>
+					</select>
+					<br>
+		<div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">Date Of Birth</span>
       </div>
       <input type="date" class="form-control" name="age"   min='1910-01-01' max='2010-01-01' value="<?php getInputValue('age'); ?>">
        </div>
-        </div>
-        <div class="col-md-6">
-        <center><h5 class="alert alert-success">Adress info</h5></center>
+				</div>
+				<div class="col-md-6">
+				<center><h5 class="alert alert-success">Adress info</h5></center>
   
-  <div class="input-group mb-3">
+	<div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">Province</span>
 
@@ -142,7 +138,7 @@ $rows = $con->query($sql)->fetchColumn();
 
           </select>
     </div>
-      <div class="input-group mb-3">
+    	<div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
        District&nbsp&nbsp</span>
@@ -151,51 +147,48 @@ $rows = $con->query($sql)->fetchColumn();
 
           </select>
     </div>
-      <div class="input-group mb-3">
+    	<div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
        Sector&nbsp&nbsp&nbsp&nbsp</span>
       </div>
       <input type="text" class="form-control" name="sector" >
     </div>
-      <div class="input-group mb-3">
+    	<div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
        Cell&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
       </div>
       <input type="text" class="form-control" name="cell" >
     </div>
-      <div class="input-group mb-3">
+    	<div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
        Village&nbsp&nbsp&nbsp&nbsp</span>
       </div>
       <input type="text" class="form-control" name="village" >
      </div>
-      
-        <center><h5 class="alert alert-success">Other info</h5></center>
-        <select class="form-control" name="bank" id="province" >
-            <option selected disabled>Select your bank</option>
-            <option value="Bank Of Kigali">Bank Of Kigali</option>
-            <option value="BPR">BPR</option>
-            <option value="Equity">Equity</option>
-            <option value="Sacco">Sacco</option>
-            <option value="GT Bank">GT Bank</option>
 
-          </select><br>
-      
-      <input type="text" class="form-control" name="bankaccount" min="0" placeholder="Account Number"><br>
-      <input type="text" class="form-control" name="accountowner" min="0" placeholder="Account Owner"><br>
-    </div></div>
-     <div class="row">
-          <button class="btn btn-success  btn-sm" name="register"  >Register</button>
-        
-          <button class="btn btn-warning  btn-sm" type="button" id="cancel">Cancel</button>
-       
-     </div>
-   </form>
+           <?php echo $account->getError(Constants::$PhoneInvalid); ?>
+           <?php echo $account->getError(Constants::$usernameTaken); ?>
+     <div class="input-group mb-3">
+      <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">Telephone</span>
       </div>
-    </div>
+      <input type="number" class="form-control" name="phone" min="0">
+    </div><br>
+       <div class="row">
+       	<div class="col-md-6">
+       		<button class="btn btn-success btn-block btn-sm" name="register" >Register</button>
+       	</div>
+       	<div class="col-md-6">
+       		<button class="btn btn-warning btn-block btn-sm" type="button" id="cancel">Cancel</button>
+       	</div>
+	   </div>
+		</div></div>
+	 </form>
+			</div>
+		</div>
     <br>
     <div class="card" id="userList" style="display: none;">
       <div class="card-header"><span>Registered members</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -210,7 +203,8 @@ $rows = $con->query($sql)->fetchColumn();
           </select>  &nbsp; Entries     <input type="hidden" name="" id="currentPage"> </span><button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Export PDF </button>
         <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Export EXCEL </button>
       <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Export CSV </button>
-    <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Copy</button><button style="border: none;background: transparent;"><form> <input type="search" name="" style="border-radius: 10px;"><button style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;background: transparent;"><img src="../images/search.png" width="20" height="20" ></button></form></button></div>
+    <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Copy</button><button style="border: none;background: transparent;"><form> <input type="search" name="" style="border-radius: 10px;"><button style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;background: transparent;"><img src="../images/search.png" width="20" height="20" ></button></form></button>
+  </div>
       <div class="card-body">
         
 
@@ -220,7 +214,7 @@ $rows = $con->query($sql)->fetchColumn();
        <div   id="pagination_controls"></div>
       </div>
     </div>
-  </div>
+	</div>
 
 <script type="text/javascript">
   $("#showUserList").click(function(){
@@ -272,7 +266,7 @@ var total_r=<?php echo $rows; ?>; // last page number
   var pagination_controls = document.getElementById("pagination_controls");
   results_box.innerHTML = "loading results ...";
   var hr = new XMLHttpRequest();
-    hr.open("POST", "../superadmin/membersList.php", true);
+    hr.open("POST", "membersList.php", true);
     hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     hr.onreadystatechange = function() {
       if(hr.readyState == 4 && hr.status == 200) {
