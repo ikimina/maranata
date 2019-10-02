@@ -54,8 +54,15 @@ $transaction=new Transaction($con,$_SESSION['user']) ;
       </a>
       </li>
           <li class="nav-item">
-        <a href="../logout.php" class="nav-link waves-effect waves-light">
+        <a href="index.php#profile" class="nav-link waves-effect waves-light">
         <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; <span><?php echo  $userLoggedIn->getFname()?> </span>
+          <!-- &nbsp&nbsp&nbsp&nbsp | -->
+        </a>
+      </li>
+
+       <li class="nav-item">
+        <a href="../logout.php" class="nav-link waves-effect waves-light">
+        <i class="fas fa-power-off"></i>&nbsp;&nbsp; <span>Logout</span>
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>

@@ -11,7 +11,7 @@ class Account {
     public function login($un, $pw) {
         //$pw = hash("sha512", $pw);
 
-        $query = $this->con->prepare("SELECT * FROM credential WHERE username=:un AND password=:pw");
+        $query = $this->con->prepare("SELECT * FROM credential WHERE username=:un AND password=:pw AND active='yes'");
         $query->bindParam(":un", $un);
         $query->bindParam(":pw", $pw);
 
@@ -217,17 +217,19 @@ class Account {
             return "<span class='errorMessage'>$error</span>";
         }
     }
-  public function insertCredention($uid,$username,$type)
+  public function insertCredention($uid,$username,$type){  
 
-  {    $password="00000";
-       $query = $this->con->prepare("INSERT INTO credential(user_id, username, password,type)
-                                    VALUES (:uid, :username, :password, :type)") ;          
+
+    $password="00000";
+  $active="yes";
+       $query = $this->con->prepare("INSERT INTO credential(user_id, username, password,type,active) VALUES (:uid, :username, :password, :type,:active)") ;          
       
         $query->bindParam(":uid", $uid);
         $query->bindParam(":username", $username);
         $query->bindParam(":password", $password);
          $query->bindParam(":type", $type);
-
+          $query->bindParam(":active", $active);
+             
         if ($query->execute()) {
             return true;
         }
@@ -279,8 +281,50 @@ class Account {
 
 
 
+ public function getChangingPassword($uid,$username,$type,$password,$password2) {   
 
 
+    $this->validatePasswords($password, $password2) ;
+     if(empty($this->errorArray)) {
+       $active="yes";
+       $query = $this->con->prepare("INSERT INTO credential(user_id, username, password,type,active) VALUES (:uid, :username, :password, :type,:active)") ;          
+      
+        $query->bindParam(":uid", $uid);
+        $query->bindParam(":username", $username);
+        $query->bindParam(":password", $password);
+         $query->bindParam(":type", $type);
+          $query->bindParam(":active", $active);
+             
+        if ($query->execute()) {
+            return $this->con->lastInsertId();;
+        }
+        else{
+        return false;
+                }
+
+              }
+                else{
+
+                  return false;
+                }
+        
+  }
+
+ private function validatePasswords($pw, $pw2) {
+        if($pw != $pw2) {
+            array_push($this->errorArray, Constants::$passwordsDoNotMatch);
+            return;
+        }
+
+        // if(preg_match("/[^A-Za-z0-9]/", $pw)) {
+        //     array_push($this->errorArray, Constants::$passwordNotAlphanumeric);
+        //     return;
+        // }
+
+        // if(strlen($pw) > 30 || strlen($pw) < 5) {
+        //     array_push($this->errorArray, Constants::$passwordLength);
+        // }
+    }
 
 
 } ?>

@@ -6,7 +6,7 @@
  */
 class User
 {
-	
+	private $con,$tel,$sqlData;
 	function __construct($con,$tel)
 	{
 		$this->con=$con;
@@ -26,6 +26,11 @@ class User
      }
      
  }
+
+    public function getId()
+    {
+        return $this->sqlData["id"];
+    }
     public function getFname()
     {
     	return $this->sqlData["fname"];
@@ -52,26 +57,26 @@ class User
     }
 
     public function getProfilePic() {
-        return $this->sqlData["profilePic"];
+        return $this->sqlData["profilepic"];
     }
 
     public function getCreatedDate() {
         return $this->sqlData["created_date"];
     }
     public function getProvince() {
-        return $this->sqlData["province"];
+        return $this->translateRegion($this->sqlData["province"],'province');
     }
     public function getDistrict() {
-        return $this->sqlData["district"];
+        return $this->translateRegion($this->sqlData["district"],'district');
     }
     public function getSector() {
-        return $this->sqlData["sector"];
+        return $this->translateRegion($this->sqlData["sector"],'sector');
     }
     public function getCell() {
-        return $this->sqlData["cell"];
+        return $this->translateRegion($this->sqlData["cell"],'cell');
     }
     public function getVillage() {
-        return $this->sqlData["village"];
+        return $this->translateRegion($this->sqlData["village"],'village');
     }
     public function getSex() {
         return $this->sqlData["sex"];
@@ -82,10 +87,50 @@ class User
     public function getDob() {
         return $this->sqlData["dob"];
     }
-    public function getAccountNo() {
-        return $this->sqlData["sex"];
+    public function getAccountNumber() {
+        return $this->sqlData["accountnumber"];
     }
+     public function getBankName() {
+        return $this->sqlData["accountname"];
+    }
+    public function translateRegion($id,$to){
+        $field="";
+        if ($to=="province") {
+         $field="prov_id";
+        }
+        if ($to=="district") {
+         $field="dist_id";
+        }
+        if ($to=="sector") {
+         $field="sect_id";
+        }
+        if ($to=="cell") {
+         $field="cell_id";
+        }
+        if ($to=="village") {
+         $field="vill_id";
+        }
+       $query = $this->con->prepare("SELECT $to FROM regions WHERE  $field = :un");
+        $query->bindParam(":un", $id);
+        $query->execute();
 
+        return  $query->fetch(PDO::FETCH_ASSOC)[$to];
+    }
+    public function getAllUser()
+                {
+            $sql = "SELECT COUNT(id) FROM members WHERE active='yes'";
+            $rows = $this->con->query($sql)->fetchColumn();
+       return $rows;
+    }
+    public function getChangingPasswordCount()
+
+                {
+                  $tel=  $this->tel;
+            $sql = "SELECT COUNT(id) FROM credential WHERE username='$tel'";
+            $rows = $this->con->query($sql)->fetchColumn();
+       return $rows;
+    }
+       
 }
 
 

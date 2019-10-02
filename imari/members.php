@@ -129,46 +129,48 @@ $rows = $con->query($sql)->fetchColumn();
        <span class="input-group-text" id="basic-addon3">Province</span>
 
       </div>
-        <select class="form-control" name="province" id="province" onchange="populateDistrict(this.id,'district1')">
-            <option ></option>
-            <option value="Est">Est</option>
-            <option value="North">North</option>
-            <option value="West">West</option>
-            <option value="South">South</option>
-            <option value="Kigali City">Kigali City</option>
+        <select class="form-control" name="province" id="province" onchange="getRegion(this.value,'district1','1')">
+            
 
           </select>
     </div>
       <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       District&nbsp&nbsp</span>
+       District&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <select class="form-control" name="district" onchange="" id="district1">
+      <select class="form-control" name="district"  id="district1" onchange="getRegion(this.value,'sector','2')">
+
+          </select>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">
+      Sector&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </div>
+      <select class="form-control" name="sector"  id="sector" onchange="getRegion(this.value,'cell','3')">
 
           </select>
     </div>
       <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       Sector&nbsp&nbsp&nbsp&nbsp</span>
+      Cell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <input type="text" class="form-control" name="sector" >
+      <select class="form-control" name="cell"  id="cell" onchange="getRegion(this.value,'village','4')">
+
+          </select>
     </div>
+      
       <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       Cell&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      Village&nbsp&nbsp</span>
       </div>
-      <input type="text" class="form-control" name="cell" >
+      <select class="form-control" name="village"  id="village" >
+
+          </select>
     </div>
-      <div class="input-group mb-3">
-      <div class="input-group-prepend">
-       <span class="input-group-text" id="basic-addon3">
-       Village&nbsp&nbsp&nbsp&nbsp</span>
-      </div>
-      <input type="text" class="form-control" name="village" >
-     </div>
       
         <center><h5 class="alert alert-success">Bank info</h5></center>
       
@@ -240,26 +242,22 @@ $rows = $con->query($sql)->fetchColumn();
     $("#registrationForm").hide(600);
    $("#userList").show(700);
  });
-  function populateDistrict(s1,s2){
-  var s1 = document.getElementById(s1);
-  var s2 = document.getElementById(s2);
+getRegion(null,'province','0');
 
-  s2.innerHTML = ""
-  if(s1.value == "Est"){
-    var optionArray = ["|","Gatsibo|Gatsibo","Nyagatare|Nyagatare","Kayonza|Kayonza","Rwamagana|Rwamagana"];
-  } else if(s1.value == "West"){
-    var optionArray = ["|","Rubavu|Rubavu","Nyabihu|Nyabihu","Ngororero|Ngororero"];
-  } else if(s1.value == "North"){
-    var optionArray = ["|","Gicumbi|Gicumbi","Musanze|Musanze","Rulindo|Rulindo","Gakenke|Gakenke","Burera|Burera"];
+  function getRegion(s1,s2,s3){
+           xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      var res=this.responseText;
+         
+      _(s2).innerHTML=res;
+      // _('worspace').style.display="block";
+    }
   }
-  for(var option in optionArray){
-    var pair = optionArray[option].split("|");
-    var newOption = document.createElement("option");
-    newOption.value = pair[0];
-    newOption.innerHTML = pair[1];
-    s2.options.add(newOption);
+  xmlhttp.open("GET","../region.php?id="+s1+"&sel="+s3,true);
+  xmlhttp.send();
   }
-}
+
 function _(id) {
   return document.getElementById(id);
 }

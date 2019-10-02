@@ -24,13 +24,17 @@ $q1=$con->query($sql1);
           <th>First Name</th>
           <th>Last Name</th>
           <th>Telephone</th>
+          <th>Sector</th>
+          <th>Cell</th>
+          <th>Village</th>
           <th>Action</th></tr>
          <tr >";
 $i=1;
 foreach ($q1 as $row) {
     # code...
      $dataString .='<tr> <td>'.$i++.'</td>
-    <td>'.$row['fname'].'</td><td>'.$row['lname'].'</td><td>'.$row['phone']."</td><td>view</td></tr>";
+    <td>'.$row['fname'].'</td><td>'.$row['lname'].'</td><td>'.$row['phone'].'</td><td>'.$row['sector'].'</td><td>'.$row['cell'].'</td><td>'.$row['village']."</td><td><a href='user_info_page.php?user=".$row['phone']."' class='btn btn-sm  mr-4' type='button' 
+   style='color:#000 !important;'><i class='fas fa-eye'></i>View</a></td></tr>";
   }
    $dataString ." </table>";
  

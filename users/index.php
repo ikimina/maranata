@@ -5,6 +5,11 @@ require_once("../includes/dbconnect.php");
 
 require_once("../includes/classes/user.php");
 $userLoggedIn=new User($con,$_SESSION['user']) ;
+
+if ($userLoggedIn->getChangingPasswordCount()<2) {
+	header("location: ../passwordChange.php");
+	exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +80,7 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
 </div>
 <hr>
 
-<div class="row">
+<div class="row" id="profile">
 	<div class="col-md-12">
 		<div class="card">
 			<div class="card-header alert alert-success" style="margin-bottom: -1px !important;">
@@ -117,4 +122,7 @@ $userLoggedIn=new User($con,$_SESSION['user']) ;
 
 </body>
 </html>
+<?php
+include "includes/footer.php";
+?>
 

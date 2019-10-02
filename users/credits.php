@@ -9,7 +9,7 @@ include ("usersheader.php");
 </head>
 <body><br>
 <div class="container">
-	<div class="card">
+	<div class="card" style="box-shadow: none;border:1px solid;">
 	  <center>
 	  <p class="alert alert-info"><b>Credits Description</b></p>
 	  </center>
