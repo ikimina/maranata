@@ -5,7 +5,9 @@ include("adminheader.php");
 include "../includes/dbconnect.php";
 require_once("../includes/classes/user.php");
 require_once("../includes/classes/transaction.php");
+require_once("../includes/classes/Loan.php");
 $transaction= new Transaction($con,null);
+$loan= new Transaction($con,null);
 $user=new User($con,null) ;
 ?>
 <br>
@@ -40,7 +42,7 @@ $user=new User($con,null) ;
         <label class="form-control">
         <center>Total Loan this year   450000</center>
         </label>
-      </div>
+      </div><?php echo $loan->receivedDate(); ?>
        <div class="table-responsive">
         <table class="table table-stripped table-bordered">
           <th>Jan</th>
