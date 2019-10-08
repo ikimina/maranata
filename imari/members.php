@@ -25,31 +25,16 @@ if(isset($_POST["register"])) {
     $sector = FormSanitizer::sanitizeFormString($_POST["sector"]);
     $cell = FormSanitizer::sanitizeFormString($_POST["cell"]);
     $village = FormSanitizer::sanitizeFormString($_POST["village"]);
+    $memberpic=$_FILES['memberpic'];
+    $signature=$_FILES['singnaturepic'];
+    $bankName=$_POST['bankname'];
+    $accountName = FormSanitizer::sanitizeFormAccountName($_POST["accountname"]);
+    $accountNumber = FormSanitizer::sanitizeFormAccountNumber($_POST["accountnumber"]);
 
-    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,null,null,null);
+    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,null,$memberpic,null,$signature,$accountName,$accountNumber,$bankName);
 
-    if(is_array($wasSuccessful)) {
-      $query = $con->prepare("INSERT INTO credential(user_id, username, password,type)
-                                    VALUES (:uid, :username, :password, :type)") ;          
-
-        $query->bindParam(":uid", $uid);
-        $query->bindParam(":username", $username);
-        $query->bindParam(":password", $password);
-         $query->bindParam(":type", $type);
-
-        $uid= $wasSuccessful[0];
-        $username=$wasSuccessful[1];
-        $password="00000";
-        $type=$wasSuccessful[2];
-        if ($query->execute()) {
-          $_SESSION["userLoggedIn"] = $username;
-          echo "<script>alert('Done')</script>";
-        }
-        else{
-           echo "<script>alert('failed')</script>";
-        }
-        
-     
+    if ($wasSuccessful) {
+      echo "<script>alert('Done');</script>";
     }
 
 }
@@ -82,7 +67,7 @@ $rows = $con->query($sql)->fetchColumn();
       <?php     } ?>
     <div class="card-header">User Registration</div>
     <div class="card-body">
-    <form method="POST" action="registration.php">
+    <form method="POST" action="members.php" enctype="multipart/form-data">
       <div class="row">
 
         <div class="col-md-6">
@@ -125,15 +110,15 @@ $rows = $con->query($sql)->fetchColumn();
        </div>
            <div class="input-group mb-3">
       <div class="input-group-prepend">
-       <span class="input-group-text" id="basic-addon3">Member picture&nbsp&nbsp</span>
+       <span class="input-group-text" id="basic-addon3" >Member picture&nbsp&nbsp</span>
       </div>
-      <input type="file" class="form-control" name="">
+      <input type="file" class="form-control" name="memberpic">
        </div>
            <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">Signature picture</span>
       </div>
-      <input type="file" class="form-control" name="">
+      <input type="file" class="form-control" name="singnaturepic">
        </div>
         </div>
         <div class="col-md-6">
@@ -144,50 +129,52 @@ $rows = $con->query($sql)->fetchColumn();
        <span class="input-group-text" id="basic-addon3">Province</span>
 
       </div>
-        <select class="form-control" name="province" id="province" onchange="populateDistrict(this.id,'district1')">
-            <option ></option>
-            <option value="Est">Est</option>
-            <option value="North">North</option>
-            <option value="West">West</option>
-            <option value="South">South</option>
-            <option value="Kigali City">Kigali City</option>
+        <select class="form-control" name="province" id="province" onchange="getRegion(this.value,'district1','1')">
+            
 
           </select>
     </div>
       <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       District&nbsp&nbsp</span>
+       District&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <select class="form-control" name="district" onchange="" id="district1">
+      <select class="form-control" name="district"  id="district1" onchange="getRegion(this.value,'sector','2')">
+
+          </select>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">
+      Sector&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      </div>
+      <select class="form-control" name="sector"  id="sector" onchange="getRegion(this.value,'cell','3')">
 
           </select>
     </div>
       <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       Sector&nbsp&nbsp&nbsp&nbsp</span>
+      Cell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <input type="text" class="form-control" name="sector" >
+      <select class="form-control" name="cell"  id="cell" onchange="getRegion(this.value,'village','4')">
+
+          </select>
     </div>
+      
       <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       Cell&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      Village&nbsp&nbsp</span>
       </div>
-      <input type="text" class="form-control" name="cell" >
+      <select class="form-control" name="village"  id="village" >
+
+          </select>
     </div>
-      <div class="input-group mb-3">
-      <div class="input-group-prepend">
-       <span class="input-group-text" id="basic-addon3">
-       Village&nbsp&nbsp&nbsp&nbsp</span>
-      </div>
-      <input type="text" class="form-control" name="village" >
-     </div>
       
         <center><h5 class="alert alert-success">Bank info</h5></center>
       
-            <select class="form-control" name="" id="" >
+            <select class="form-control" name="bankname" id="" >
             <option selected disabled>Select your bank</option>
             <option value="Bank Of Kigali">Bank Of Kigali</option>
             <option value="BPR">BPR</option>
@@ -197,8 +184,8 @@ $rows = $con->query($sql)->fetchColumn();
 
           </select>&nbsp
           <div class="input-group mb-3">
-        <input class="form-control" type="text" name="" placeholder="Account Owner">&nbsp
-         <input class="form-control" type="text" name="" placeholder="Account Number">
+        <input class="form-control" type="text" name="accountname" placeholder="Account Owner" >&nbsp
+         <input class="form-control" type="text" name="accountnumber" placeholder="Account Number">
        </div><br>
      <div class="row">
      <div class="col-md-6">
@@ -255,26 +242,22 @@ $rows = $con->query($sql)->fetchColumn();
     $("#registrationForm").hide(600);
    $("#userList").show(700);
  });
-  function populateDistrict(s1,s2){
-  var s1 = document.getElementById(s1);
-  var s2 = document.getElementById(s2);
+getRegion(null,'province','0');
 
-  s2.innerHTML = ""
-  if(s1.value == "Est"){
-    var optionArray = ["|","Gatsibo|Gatsibo","Nyagatare|Nyagatare","Kayonza|Kayonza","Rwamagana|Rwamagana"];
-  } else if(s1.value == "West"){
-    var optionArray = ["|","Rubavu|Rubavu","Nyabihu|Nyabihu","Ngororero|Ngororero"];
-  } else if(s1.value == "North"){
-    var optionArray = ["|","Gicumbi|Gicumbi","Musanze|Musanze","Rulindo|Rulindo","Gakenke|Gakenke","Burera|Burera"];
+  function getRegion(s1,s2,s3){
+           xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      var res=this.responseText;
+         
+      _(s2).innerHTML=res;
+      // _('worspace').style.display="block";
+    }
   }
-  for(var option in optionArray){
-    var pair = optionArray[option].split("|");
-    var newOption = document.createElement("option");
-    newOption.value = pair[0];
-    newOption.innerHTML = pair[1];
-    s2.options.add(newOption);
+  xmlhttp.open("GET","../region.php?id="+s1+"&sel="+s3,true);
+  xmlhttp.send();
   }
-}
+
 function _(id) {
   return document.getElementById(id);
 }

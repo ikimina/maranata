@@ -2,6 +2,11 @@
 <?php
 session_start();
 include("adminheader.php");
+include "../includes/dbconnect.php";
+require_once("../includes/classes/user.php");
+require_once("../includes/classes/transaction.php");
+$transaction= new Transaction($con,null);
+$user=new User($con,null) ;
 ?>
 <br>
 </body>
@@ -82,22 +87,22 @@ include("adminheader.php");
    	<div class="col-md-3">
    		<div class="card">
    			<div class="card-header">
-  				<center><font>All Members</font></center>
+  				<center><font><i class="fas fa-users"></i>&nbsp;All Members</font></center>
    				<hr>
-   				<center><h3>70</h3></center>
+   				<center><h3><?php echo $user->getAllUser(); ?></h3></center>
    				<hr>
-   				<a href="">Read More</a>
+   				<a href="registration.php">Read More</a>
    			</div>
    		</div>
    	</div>
    	<div class="col-md-3">
    		<div class="card">
    			<div class="card-header">
-   				<center><font>Total Savings</font></center>
+   				<center><font><i class="fas fa-money-check"></i>&nbsp;Total Savings</font></center>
    				<hr>
-   				<center><h3>350000</h3></center>
+   				<center><h3><?php echo $transaction->getTotalBalance(); ?><span style="font-size: 13px;">Rwf</span></h3></center>
    				<hr>
-   				<a href="">Read More</a>
+   				<a href="saving.php">Read More</a>
    			</div>
    		</div>
    	</div>

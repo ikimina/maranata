@@ -32,7 +32,7 @@ if (isset($_POST['register'])) {
     $type=@$_POST["type"];
     $file=$_FILES["pic"];
  
-    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email);
+    $wasSuccessful = $account->register($firstName, $lastName, $phone, $idNo, $sex, $merital, $dob,$province,$district,$sector,$cell,$village,$type,$file,$email,null,null,null,null);
 
     if($wasSuccessful) {
                                 
@@ -171,7 +171,7 @@ foreach ($q1 as $row) {
           </select>  &nbsp; Entries     <input type="hidden" name="" id="currentPage"> </span><button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Export PDF </button>
         <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Export EXCEL </button>
       <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Export CSV </button>
-    <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Copy</button><button style="border: none;background: transparent;"><form> <input type="search" name="" style="border-radius: 10px;"><button style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;background: transparent;"><img src="../images/search.png" width="20" height="20" ></button></form></button> <div style="float: right;"><a href="<?php echo $_SERVER['PHP_SELF']."?new_staff=nstf" ?>">Add new Role&nbsp;&nbsp;<i class="fas fa-plus-circle"></i></a>&nbsp;&nbsp;<a href="<?php echo $_SERVER['PHP_SELF']."?new_staff=nstf" ?>">New Staff&nbsp;&nbsp;<i class="fas fa-plus-circle"></i></a></div></div>
+    <button class="btn btn-sm" style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;">Copy</button> <div style="float: right;"><a href="<?php echo $_SERVER['PHP_SELF']."?new_staff=nstf" ?>">Add new Role&nbsp;&nbsp;<i class="fas fa-plus-circle"></i></a>&nbsp;&nbsp;<a href="<?php echo $_SERVER['PHP_SELF']."?new_staff=nstf" ?>">New Staff&nbsp;&nbsp;<i class="fas fa-plus-circle"></i></a></div></div>
 			<div class="card-body">
 				<table class="table table-stipped table-bordered">
 					<th>No</th>
@@ -188,7 +188,7 @@ foreach ($q1 as $row) {
           <?php echo $out; ?>
 				</table>
 
-  <center> <b><?php echo $textline1; ?> Staff in Archive</b></center>
+  <center> <b><?php echo $textline1; ?> Staff</b></center>
   <p><?php echo $textline2; ?></p>
   <div id="pagination_controls"><?php echo $paginationCtrls; ?></div><br>
 
@@ -246,41 +246,53 @@ foreach ($q1 as $row) {
 				<div class="col-md-6">
 				<center><h5 class="alert alert-success" style="
     border-radius: 0px !important;">Adress info</h5></center>
-
-	<div class="input-group mb-3">
+ <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">Province</span>
+
       </div>
-      <input type="text" class="form-control" name="province" >
+        <select class="form-control" name="province" id="province" onchange="getRegion(this.value,'district1','1')">
+            
+
+          </select>
     </div>
-    	<div class="input-group mb-3">
+      <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       District&nbsp&nbsp</span>
+       District&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <input type="text" class="form-control" name="district" >
+      <select class="form-control" name="district"  id="district1" onchange="getRegion(this.value,'sector','2')">
+
+          </select>
     </div>
-    	<div class="input-group mb-3">
+    <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       Sector&nbsp&nbsp&nbsp&nbsp</span>
+      Sector&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <input type="text" class="form-control" name="sector" >
+      <select class="form-control" name="sector"  id="sector" onchange="getRegion(this.value,'cell','3')">
+
+          </select>
     </div>
-    	<div class="input-group mb-3">
+      <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       Cell&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+      Cell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </div>
-      <input type="text" class="form-control" name="cell" >
+      <select class="form-control" name="cell"  id="cell" onchange="getRegion(this.value,'village','4')">
+
+          </select>
     </div>
-    	<div class="input-group mb-3">
+      
+      <div class="input-group mb-3">
       <div class="input-group-prepend">
        <span class="input-group-text" id="basic-addon3">
-       Village&nbsp&nbsp&nbsp&nbsp</span>
+      Village&nbsp&nbsp</span>
       </div>
-      <input type="text" class="form-control" name="village" >
-     </div>
+      <select class="form-control" name="village"  id="village" >
+
+          </select>
+    </div>
      
        <center><h5 class="alert alert-success" style="
     border-radius: 0px !important;">Other info</h5></center><br>
@@ -306,6 +318,26 @@ foreach ($q1 as $row) {
     <?php }?>
 	</div>
 </div>
+<script type="text/javascript">
+  function _(id) {
+    return document.getElementById(id);
+  }
+  getRegion(null,'province','0');
+
+  function getRegion(s1,s2,s3){
+           xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      var res=this.responseText;
+         
+      _(s2).innerHTML=res;
+      // _('worspace').style.display="block";
+    }
+  }
+  xmlhttp.open("GET","../region.php?id="+s1+"&sel="+s3,true);
+  xmlhttp.send();
+  }
+</script>
 <style type="text/css">
   .errorMessage {
     color: #f00;

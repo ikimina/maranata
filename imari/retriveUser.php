@@ -5,27 +5,64 @@ require_once("../includes/classes/user.php");
 if (isset($_REQUEST['tel'])) {
 	$tel=$_REQUEST['tel'];
 $user=new User($con,$tel) ;
-echo "
 
-    <span style='color:red;' id='user'>".$user->isUserValid()."</span>
-    <div style='margin-top:10px;'>
-  	<div style='float: left'>
-  		<label>Names:</label><b>".$user->getNames()."</b><br>
-  		<label>Telephone:</label><b id='phone'>".$tel."</b><br>
-  		<label>Sex:</label><b>".$user->getSex()."</b><br>
-
-  	</div>
-  	<div style='float: right;''>
-  		<label >Sector:</label><b>".$user->getCell()."</b><br>
-  		<label>Cell:</label><b>".$user->getSector()."</b><br>
-  		<label>Village:</label><b>".$user->getVillage()."</b><br>
-  		
-
-  	</div></div>
-";
  
 
+
+echo '<div> <span style="color:red;" id="user">'.$user->isUserValid().'</span>
+  <div class="row">
+    <div class="col-md-5">
+     
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Names</span>
+      </div>
+      <label  class="form-control" ><b>'.$user->getNames().'</b></label>
+       </div>
+    
+
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Phone&nbsp</span>
+      </div>
+       <label  class="form-control" ><b>'.$tel.'</b></label>
+       </div>
+
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Gender</span>
+      </div>
+       <label  class="form-control" ><b>'.$user->getSex().'</b></label>
+       </div>
+
+      </div> 
+    <div class="col-md-2"></div>
+    <div class="col-md-5">
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Sector</span>
+      </div>
+       <label  class="form-control" ><b>'.$user->getSector().'</b></label>       </div>
+    
+
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">
+      Cell &nbsp&nbsp&nbsp&nbsp
+      </span>
+      </div>
+    <label  class="form-control" ><b>'.$user->getCell().'</b></label>
+       </div>
+
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">Village</span>
+      </div>
+       <label  class="form-control" ><b>'.$user->getVillage().'</b></label>
+       </div>
+    </div>
+  </div>
+</div>';
  
 }
  ?>
-

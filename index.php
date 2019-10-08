@@ -85,7 +85,13 @@ function getInputValue($name) {
                     <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                     </div>
                     <div class="form-group">
-                    <?php echo $account->getError(Constants::$loginFailed); ?>
+                    <?php echo $account->getError(Constants::$loginFailed);
+                     if (isset($_GET['ver'])) {
+                       echo "<span style='color:green'>You can now login using you new credential</span><br>";
+                     }
+
+                     ?>
+
                     <input type="text" name="username" class="form-control form-control-user" placeholder="Telephone" value="<?php getInputValue('username'); ?>"  required>
                     </div>
                     <div class="form-group">
