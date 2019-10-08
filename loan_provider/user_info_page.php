@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("colheader.php");
 include "../includes/dbconnect.php";
 
