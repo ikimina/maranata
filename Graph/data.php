@@ -1,6 +1,6 @@
 <?php
  header('Content-Type: application/json');
-
+ include("../includes/dbconnect.php");
 
  $conn=mysqli_connect('localhost','root','','graph');
 
