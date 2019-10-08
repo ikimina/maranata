@@ -1,5 +1,6 @@
 <?php
 include ("../includes/header.php");
+
 session_start();
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="6") {
 
@@ -12,8 +13,10 @@ include '../includes/dbconnect.php';
 
 require_once("../includes/classes/user.php");
 require_once("../includes/classes/transaction.php");
+require_once("../includes/classes/Loan.php");
 $userLoggedIn=new User($con,$_SESSION['user']) ;
 $transaction=new Transaction($con,$_SESSION['user']) ;
+$loan=new Loan($con,$_SESSION['user']);
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +38,9 @@ $transaction=new Transaction($con,$_SESSION['user']) ;
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="credits.php">Loan <span class="badge badge-warning">00000</span></a>
+        <a class="nav-link" href="credits.php">Loan <span class="badge badge-warning"><?php if ($loan->loanAmount()=="") {
+         echo "O Rwf";
+        } else echo $loan->loanAmount()."&nbsp Rwf"; ?></span></a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="transaction.php">Transaction </a>

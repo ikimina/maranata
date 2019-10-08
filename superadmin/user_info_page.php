@@ -1,10 +1,10 @@
 <?php
-include("colheader.php");
+session_start();
+include("adminheader.php");
 include "../includes/dbconnect.php";
 
 require_once("../includes/classes/user.php");
 require_once("../includes/classes/transaction.php");
-require_once("../includes/classes/Loan.php");
 
 $transaction=new Transaction($con,$_SESSION['user']) ;
 $phone="";
@@ -17,7 +17,6 @@ else{
 }
 $user=new User($con,$phone) ;
 $transaction=new Transaction($con,$phone) ;
-$loan=new Loan($con,$phone) ;
  function leaveSpace($size)
 {
 	for ($i=0; $i <$size ; $i++) { 
@@ -92,12 +91,12 @@ $loan=new Loan($con,$phone) ;
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-6">Saving Balance:&nbsp;<b><?php echo $transaction->getBalance() ?></b>&nbsp;Rwf&nbsp;<a href="">Other Saving Info</a></div>
-					<div class="col-md-6">Unpaid Loan&nbsp;<b><?php echo $loan->loanAmount(); ?>&nbsp;</b>Rwf&nbsp;<a href="">Other Loan Info</a> </div>
+					<div class="col-md-6">Unpaid Loan&nbsp;<b>0&nbsp;</b>Rwf&nbsp;<a href="">Other Loan Info</a> </div>
 					
 				</div>
 			</div>
 			<div class="card-footer">
-				<button class="btn btn-primary" onclick="ShowForm()">Provide Loan</button>
+			<!-- 	<button class="btn btn-primary" onclick="ShowForm()">Provide Loan</button>
 				
 				<div id="form" style="display: none;">
 					<label>Amount</label>
@@ -113,7 +112,7 @@ $loan=new Loan($con,$phone) ;
 					</select>
 					<button class="btn btn-sm btn-primary" id="allowLoan" onclick="allowLoan()">Allow</button><span id="resp"></span>
 			
-				</div>
+				</div> -->
 			</div>
 			</div>
 		</div>

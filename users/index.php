@@ -4,7 +4,9 @@ include("usersheader.php");
 require_once("../includes/dbconnect.php");
 
 require_once("../includes/classes/user.php");
+require_once("../includes/classes/Loan.php");
 $userLoggedIn=new User($con,$_SESSION['user']) ;
+$loan=new Loan($con,$_SESSION['user']) ;
 
 if ($userLoggedIn->getChangingPasswordCount()<2) {
 	header("location: ../passwordChange.php");
@@ -26,7 +28,9 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
  		<h5 class="alert alert-success"><center>Total Saving  <span style="color: green;"><b><?php echo  $transaction->getBalance()?> </b>Rwf</span></center></h5>
  	</div>
  	<div class="col-md-4">
- 		<h5 class="alert alert-success"><center>You have 0 loan yet</center></h5>
+ 		<h5 class="alert alert-success"><center>You have <?php if ($loan->loanAmount()=="") {
+         echo "O Rwf";
+        } else echo $loan->loanAmount()."&nbsp Rwf"; ?> loan Now</center></h5>
  	</div>
  	<div class="col-md-4">
  		<h5 class="alert alert-success"><center>Next Saving Date</center></h5>
@@ -82,7 +86,7 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 
 <div class="row" id="profile">
 	<div class="col-md-12">
-		<div class="card">
+		<div class="card" style="box-shadow: none;border: 1px solid;">
 			<div class="card-header alert alert-success" style="margin-bottom: -1px !important;">
 			<center>
 			Informations about you  <b><?php echo   $userLoggedIn->getNames();?></b>
@@ -96,7 +100,7 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 						<label class="form-control">Last Name:&nbsp;&nbsp;<b><?php echo $userLoggedIn->getLname(); ?></b></label>
 						<label class="form-control">
 						Bank:&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp 
-						Account No.: &nbsp;&nbsp;<b><?php echo $userLoggedIn->getAccountNo(); ?></b>
+						Account No.: &nbsp;&nbsp;<b><?php echo $userLoggedIn->getAccountNumber(); ?></b>
 						</label>
 						<label class="form-control">Date of Birth:&nbsp;&nbsp;<b><?php echo $userLoggedIn->getDob(); ?></b></label>
 						<label class="form-control">
@@ -123,6 +127,6 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 </body>
 </html>
 <?php
-include "includes/footer.php";
+include "../includes/footer.php";
 ?>
 

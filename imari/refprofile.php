@@ -1,29 +1,29 @@
 <?php
-include("colheader.php");
+session_start();
+include("imariheader.php");
 include "../includes/dbconnect.php";
 
 require_once("../includes/classes/user.php");
 require_once("../includes/classes/transaction.php");
 require_once("../includes/classes/Loan.php");
 
-$transaction=new Transaction($con,$_SESSION['user']) ;
 $phone="";
 if (isset($_GET['user'])) {
 	$phone=$_GET['user'];
+	$id=$_GET['l'];
 }
 else{
 	header("Location:index.php");
 	exit();
 }
-$user=new User($con,$phone) ;
-$transaction=new Transaction($con,$phone) ;
-$loan=new Loan($con,$phone) ;
- function leaveSpace($size)
+function leaveSpace($size)
 {
 	for ($i=0; $i <$size ; $i++) { 
 		echo '&nbsp';
 	}
 }
+$sql1 = "SELECT * FROM refere  WHERE user_phone='$phone' AND loan_id='$id'";
+$q1=$con->query($sql1);
 
 ?>
 
@@ -39,6 +39,13 @@ $loan=new Loan($con,$phone) ;
 	</style>
 </head>
 <body>
+	<div class="continer">
+	<?php
+foreach ($q1 as $row) {
+$user=new User($con,$row['ref_phone']) ;
+$transaction=new Transaction($con,$row['ref_phone']) ;
+ 
+?>
 <div class="continer-fluid">
 	<br><div class="row">
 		<div class="col-md-6">
@@ -92,33 +99,17 @@ $loan=new Loan($con,$phone) ;
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-6">Saving Balance:&nbsp;<b><?php echo $transaction->getBalance() ?></b>&nbsp;Rwf&nbsp;<a href="">Other Saving Info</a></div>
-					<div class="col-md-6">Unpaid Loan&nbsp;<b><?php echo $loan->loanAmount(); ?>&nbsp;</b>Rwf&nbsp;<a href="">Other Loan Info</a> </div>
+					<div class="col-md-6">Unpaid Loan&nbsp;<b>0&nbsp;</b>Rwf&nbsp;<a href="">Other Loan Info</a> </div>
 					
 				</div>
 			</div>
 			<div class="card-footer">
-				<button class="btn btn-primary" onclick="ShowForm()">Provide Loan</button>
-				
-				<div id="form" style="display: none;">
-					<label>Amount</label>
-					<input type="text" name="" id="amount">
-					<label>Duration</label>
-					<select id="duration">
-						<option value="1">Month</option>
-						<option value="3"> 3 Mounth</option>
-						<option value="6"> 6 Mounths</option>
-						<option value="12">Year</option>
-						<option value="18">Year 6 Mouths</option>
-						<option value="22">2 years</option>
-					</select>
-					<button class="btn btn-sm btn-primary" id="allowLoan" onclick="allowLoan()">Allow</button><span id="resp"></span>
-			
-				</div>
+				<center><b>Transactions</b></center>
 			</div>
 			</div>
 		</div>
 	</div>
-</div>
+</div><?php } ?></div>
 </body>
 </html>
 <script type="text/javascript">
