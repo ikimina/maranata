@@ -7,7 +7,7 @@ require_once("../includes/classes/user.php");
 require_once("../includes/classes/transaction.php");
 require_once("../includes/classes/Loan.php");
 $transaction= new Transaction($con,null);
-$loan= new Transaction($con,null);
+$loan= new Loan($con,null);
 $user=new User($con,null) ;
 ?>
 <br>
