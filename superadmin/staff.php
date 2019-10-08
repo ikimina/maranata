@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("adminheader.php");
 
 
@@ -15,7 +16,7 @@ function getInputValue($name) {
 }
 $reg="";
 if (isset($_POST['register'])) {
-     $sex=@$_POST["sex"];
+    $sex=@$_POST["sex"];
     $firstName = FormSanitizer::sanitizeFormString($_POST["fname"]);
     $lastName = FormSanitizer::sanitizeFormString($_POST["lname"]);
     $email=FormSanitizer::sanitizeFormEmail($_POST["email"]);

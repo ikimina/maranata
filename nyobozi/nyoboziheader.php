@@ -1,55 +1,59 @@
+
 <?php
-if (!isset($_SESSION["role"]) || $_SESSION["role"] !="5") {
+session_start();
+include ("../includes/header.php");
+include ("../includes/dbconnect.php");
+require_once '../includes/classes/user.php';
+require_once '../includes/classes/staff.php';
+if (!isset($_SESSION["role"]) || $_SESSION["role"] !="3") {
 
     header("location: ../index.php"); 
     exit();
 } 
 $username= $_SESSION["user"];
-include ("../includes/header.php");
+
+$staffLoggedIn= new Staff($con,$_SESSION["user"]);
+
 ?>
 <!DOCTYPE html>
 <html>
 
 <body>
 <!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-xl" style="" >
+<nav class="mb-1 navbar navbar-expand-lg" style="" >
   <a class="navbar-brand" href="index.php">Maranata</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class=""><i class="fa fa-bars"></i></span>
   </button> 
   <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
    <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="index.php" >Dashboard
-          <span class="sr-only"></span>
+        <a class="nav-link" href="index.php">Dashboard
+          <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="registration.php">Members</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="staff.php">Staff</a>
+        <a class="nav-link" href="#">Members</a>
       </li>
        <li class="nav-item">
         <a class="nav-link" href="#">Loans</a>
       </li>
-        <li class="nav-item">
-        <a class="nav-link" href="#">Debit</a>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Savings</a>
       </li>
 
     </ul>
 
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
+        <a href="../logout.php" class="nav-link waves-effect waves-light">
 
-        <a href="../logout.php"><i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout    ". $_SESSION["user"]; ?></span></i> 
-          <!-- &nbsp&nbsp&nbsp&nbsp | -->
-        </a>
+        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo "Logout  ".$username?> </span></i></a>
+
       </li>
 
-<!-- &nbsp&nbsp&nbsp --> 
+<!-- &nbsp&nbsp&nbsp -->         
     </ul>
   </div>
 </nav>
@@ -58,11 +62,8 @@ include ("../includes/header.php");
   <script type="text/javascript" src="../js/popper.min.js"></script>
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../js/mdb.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </body>
 </html>
-
-
 
 
 
