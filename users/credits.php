@@ -41,13 +41,21 @@ $loan=new Loan($con,$_SESSION['user']);
 	  				<th>Progress</th>
 	  				<tr>
 	  					<td><?php echo $loan->loanAmount()."&nbsp Rwf";  ?></td>
-	  					<td><?php echo $loan->payedLoan()."&nbsp Rwf"; ?></td>
+	  					<td title="<?php echo "At Rate of ".$loan->getRate()."%" ?>"><?php echo $loan->getAmountToReturn()."&nbsp Rwf"; ?></td>
 	  					<td><?php echo $loan->receivedDate(); ?></td>
-	  					<td><?php echo $loan->receivedDate(); ?></td>
+	  					<td><?php echo $loan->payementDeadline(); ?></td>
 	  					<td>3</td>
 	  					<td><?php echo $loan->payedLoan()."&nbsp Rwf"; ?></td>
 	  					<td><?php echo ((int)$loan->loanAmount()-(int)$loan->payedLoan())."&nbsp Rwf";?></td>
-	  					<td><?php echo (((int)$loan->payedLoan()*100)/(int)$loan->loanAmount())."%"; ?></td>
+	  					<td><?php
+                            $pro=0;
+                             $lo=(int)$loan->loanAmount();
+
+                                 if ($lo!=0) {
+                                 	$pro=(((int)$loan->payedLoan()*100)/$lo);
+                                 }
+
+	  					 echo $pro."%"; ?></td>
 	  				</tr>
 	  			</table>
 
@@ -63,45 +71,57 @@ $loan=new Loan($con,$_SESSION['user']);
 	  				$j=0;
                     $Referees=$loan->getReffere();
 
-
-                    for ($i=0; $i <count( $Referees) ; $i++) { 
+                      if (is_array($Referees)) {
+                      	for ($i=0; $i <count( $Referees) ; $i++) { 
                     	$j++;
                      $ref=new User($con,$Referees['ref_phone']);
                      echo "<tr><td>".$j."</td><td>".$ref->getNames()."<br></td></tr>";
                     }
 
+                      }
+                      else{
+                      	echo "No refere";
+                      }
+                    
 
 	  				 ?></table>
 	  				</div>
 	  				<div class="col-md-6">
 	  				<p class="alert alert-info"><b>Paying Schedule</b></p>
                        <?php
-                        $total=(int)$loan->loanAmount();
+                        $total=(int)$loan->getAmountToReturn();
                         $oneInt=$total/3;
-                        $paymenttime=$loan->getDuration()/3;
+                        $paymenttime=(int)$loan->getDuration()/3;
+                        $first_ins_date=date("Y-m-d",strtotime('+'.$paymenttime.' months', strtotime($loan->receivedDate())));
+                        $second_ins_date=date("Y-m-d",strtotime('+'.($paymenttime * 2) .' months', strtotime($loan->receivedDate())));
+                        
 
                         ?>
 	  				<table class="table">
 	  					<th>Instalment</th>
 	  					<th>amount</th>
+	  					<th>End pay</th>
 	  					<th>Status</th>
 	  					<th>Date</th>
 
 	  					<tr>
 	  						<td>1</td>
 	  						<td><?php echo $oneInt."&nbsp;Rwf"; ?></td>
+	  						<td><?php echo $first_ins_date; ?></td>
 	  						<td><input type="checkbox" name="#" checked=""> Paid</td>
 	  						<td>12-Sept-2015</td>
 	  					</tr>
 	  					<tr>
 	  						<td>2</td>
 	  						<td><?php echo $oneInt."&nbsp;Rwf"; ?></td>
+	  						<td><?php echo $second_ins_date; ?></td>
 	  						<td><input type="checkbox" name="#"> Unpaid</td>
 	  						<td></td>
 	  					</tr>
 	  					<tr>
 	  						<td>2</td>
 	  						<td><?php echo $oneInt."&nbsp;Rwf"; ?></td>
+	  						<td><?php echo $loan->payementDeadline(); ?></td>
 	  						<td><input type="checkbox" name="#"> Unpaid</td>
 	  						<td></td>
 	  					</tr>

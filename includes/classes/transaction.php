@@ -167,5 +167,27 @@ public function getTotalBalance()
         }
 
     	return $total;
-    }}
+    }
+
+    public function makeSavingGraph()
+    { 
+      $total=0;
+       $all=array();
+      for ($i=1; $i <12 ; $i++) { 
+        # code...
+      
+      $where="2019-09-27 14:02:20.703692+02";
+      $sql1 = "SELECT amount FROM transactions WHERE done_on='$where'";
+        $q1=$this->con->query($sql1);
+       foreach ($q1 as $row) {
+         $total+=(int) $row['amount'];
+       }
+       array_push($all, $total);
+         
+       }
+       return $all;
+
+    }
+
+  }
 ?>
