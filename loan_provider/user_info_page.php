@@ -43,68 +43,134 @@ $loan=new Loan($con,$phone) ;
 <div class="continer-fluid">
 	<br><div class="row">
 		<div class="col-md-6">
-			<div class="card"><span class="alert alert-info"><div class="row"><div class="col-md-4">
-			<img class="d-flex rounded-circle avatar z-depth-1-half mr-3" src="<?php echo $user->getProfilePic() ?>" width="50" height="50"
-    alt="Avatar"><div><b>
-					<?php echo $user->getNames(); ?></b></div></div>
-<div class="col-md-8">USER INFO</div></div></span>
-				<div class="card-body">
-					<label class="form-control userinfo">
-					Names:&nbsp;&nbsp;<b>
+			<div class="card">
+			<div class="card-header">
+				<div class="row">
+					<div class="col-md-4">
+					
+			<img class="d-flex rounded-circle avatar mr-3" src="../images/logo.jpg <?php //<?php echo $user->getProfilePic()?>" width="50" height="50"
+    alt="Avatar">
+					</div>
+					<div class="col-md-8" style="margin-top: 20px;">
+						About <b>
 					<?php echo $user->getNames(); ?></b>
-					</label>
-					<label class="form-control userinfo">
-					DOB:&nbsp;&nbsp;<b>
-					<?php echo $user->getDob(); ?></b><?php leaveSpace(20)?>
-					Gender:&nbsp;&nbsp;<b>
-					<?php echo $user->getSex(); ?></b><?php leaveSpace(10)?>
-					Marital status:&nbsp;&nbsp;<b>
-					<?php  //$user->getMeritalStatus();
-					 ?></b>
-					</label>
-					<label class="form-control userinfo">
-					Telephone:&nbsp;&nbsp;<b>
-					<?php echo $phone; ?></b>
-					</label>
+					</div>
+				</div>
+			</div>
+				
+				<div class="card-body">
+
+		      <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Names</span>
+		      </div>
+		      <label  class="form-control" ><b>
+					<?php echo $user->getNames(); ?></b>
+			  </label>
+		      </div>
+
+		      <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">DOB&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		      </div>
+		      <label  class="form-control" >
+		      	<b><?php echo $user->getDob(); ?></b>
+		      </label> &nbsp;
+		      <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Gender</span>
+		      </div>
+		      <label  class="form-control" >
+		      	<b><?php echo $user->getSex(); ?></b>
+		      </label>
+		      </div>
+
+		      <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Phone</span>
+		      </div>
+		      <label  class="form-control" >
+					<b><?php echo $phone; ?></b>
+			  </label>
+		      </div>
 
 					Adress
 					<hr>
-					<label class="form-control userinfo">
-					District:&nbsp;&nbsp;<b><?php echo $user->getDistrict(); ?></b><?php leaveSpace(40)?>
-					Sector:&nbsp;&nbsp;<b><?php echo $user->getSector(); ?></b>
-					</label>
-					<label class="form-control userinfo">
-					Cell:&nbsp;&nbsp;<b><?php echo $user->getCell(); ?></b><?php leaveSpace(40)?>
-					Village:&nbsp;&nbsp;<b><?php echo $user->getVillage(); ?></b>
-					</label>
+		      <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">District</span>
+		      </div>
+		      <label  class="form-control" >
+					<b><?php echo $user->getDistrict(); ?></b>
+			  </label>&nbsp;
+			  <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Sector</span>
+		      </div>
+		      <label  class="form-control" >
+					<b><?php echo $user->getSector(); ?></b>
+			  </label>
+		      </div>
+
+		      <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Cell&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		      </div>
+		      <label  class="form-control" >
+					<b><?php echo $user->getCell(); ?></b>
+			  </label>&nbsp;
+			  <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Village</span>
+		      </div>
+		      <label  class="form-control" >
+					<b><?php echo $user->getVillage(); ?></b>
+			  </label>
+		      </div>
 					Bank
 					<hr>
-					<label class="form-control userinfo">
-					Bank Name:&nbsp;&nbsp;<b><?php echo $user->getBankName(); ?></b><?php leaveSpace(40)?>
-					Bank account:&nbsp;&nbsp;<b><?php echo $user->getAccountNumber(); ?></b>
-					</label>
+
+		      <div class="input-group mb-3">
+		      <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Bank name</span>
+		      </div>
+		      <label  class="form-control">
+					<b><?php echo $user->getBankName(); ?></b>
+			  </label>&nbsp;
+			  <div class="input-group-prepend">
+		      <span class="input-group-text" id="basic-addon3">Acc. Number</span>
+		      </div>
+		      <label  class="form-control" >
+					<b><?php echo $user->getAccountNumber(); ?></b>
+			  </label>
+		      </div>
 				</div>
 			</div>
 		</div>
 		<?php ?>
 		<div class="col-md-6">
 			<div class="card">
-			<h5 class="alert alert-info"><center>Account usage info</center></h5>
+			<h5 class="alert alert-info"><center>Account usage information</center></h5>
 			<div class="card-body">
 				<div class="row">
-					<div class="col-md-6">Saving Balance:&nbsp;<b><?php echo $transaction->getBalance() ?></b>&nbsp;Rwf&nbsp;<a href="">Other Saving Info</a></div>
-					<div class="col-md-6">Unpaid Loan&nbsp;<b><?php echo $loan->loanAmount(); ?>&nbsp;</b>Rwf&nbsp;<a href="">Other Loan Info</a> </div>
+					<div class="col-md-6">
+					<p class="alert alert-success">Saving Balance:&nbsp;
+					<b><?php echo $transaction->getBalance() ?></b>&nbsp;Rwf&nbsp;</p>
+					<a class="btn btn-block btn-sm btn-info" href="">Other Saving Info</a>
+					</div>
+					<div class="col-md-6">
+					<p class="alert alert-warning">Unpaid Loan&nbsp;<b><?php echo $loan->loanAmount(); ?>&nbsp;</b>Rwf&nbsp;</p>
+					<a class="btn btn-block btn-sm btn-info" href="">Other Loan Info</a> 
+					</div>
 					
 				</div>
 			</div>
 			<div class="card-footer">
-				<button class="btn btn-primary" onclick="ShowForm()">Provide Loan</button>
+				<button class="btn btn-primary btn-sm" onclick="ShowForm()">Provide Loan</button>
 				
 				<div id="form" style="display: none;">
+
 					<label>Amount</label>
-					<input type="text" name="" id="amount">
+					<input class="form-control" type="text" name="" id="amount">
 					<label>Duration</label>
-					<select id="duration">
+					<select class="form-control" id="duration">
 						<option value="1">Month</option>
 						<option value="3"> 3 Mounth</option>
 						<option value="6"> 6 Mounths</option>
@@ -112,7 +178,9 @@ $loan=new Loan($con,$phone) ;
 						<option value="18">Year 6 Mouths</option>
 						<option value="22">2 years</option>
 					</select>
-					<button class="btn btn-sm btn-primary" id="allowLoan" onclick="allowLoan()">Allow</button><span id="resp"></span>
+
+					<button class="btn btn-sm btn-success" id="allowLoan" onclick="allowLoan()">Allow</button>
+					<span id="resp"></span>
 			
 				</div>
 			</div>

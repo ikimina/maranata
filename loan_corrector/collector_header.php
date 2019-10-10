@@ -1,10 +1,10 @@
 <?php
-if (!isset($_SESSION["role"]) || $_SESSION["role"] !="5") {
+// if (!isset($_SESSION["role"]) || $_SESSION["role"] ="5") {
 
-    header("location: ../index.php"); 
-    exit();
-} 
-$username= $_SESSION["user"];
+//     header("location: ../index.php"); 
+//     exit();
+// } 
+// $username= $_SESSION["user"];
 include ("../includes/header.php");
 ?>
 <!DOCTYPE html>
@@ -26,20 +26,10 @@ include ("../includes/header.php");
           <span class="sr-only"></span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="registration.php">Members</a>
-      </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="staff.php">Staff</a>
+        <a class="nav-link" href="loans.php">Loans</a>
       </li>
-       <li class="nav-item">
-        <a class="nav-link" href="Loans.php">Loans</a>
-      </li>
-        <li class="nav-item">
-        <a class="nav-link" href="saving.php">Saving</a>
-      </li>
-
     </ul>
 
        <ul class="navbar-nav ml-auto nav-flex-icons">
@@ -51,7 +41,7 @@ include ("../includes/header.php");
       </li>
      <li class="nav-item">
 
-        <a href="../logout.php"><i class="fas fa-power-off"></i>&nbsp&nbspLogout
+        <a href="../logout.php"><i class="fas fa-power-off"></i>&nbsp&nbspLogout</span>
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>

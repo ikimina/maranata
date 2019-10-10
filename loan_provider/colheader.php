@@ -38,13 +38,18 @@ $username= $_SESSION["user"];
 
        <ul class="navbar-nav ml-auto nav-flex-icons">
           <li class="nav-item">
-        <a class="nav-link waves-effect waves-light">
-        <i class="fa fa-user" aria-hidden="true">&nbsp&nbsp<span><?php echo "Logout  ".$_SESSION["user"]?> </span></i> 
+
+        <a href="../logout.php"><i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo $_SESSION["user"]; ?></span></i> &nbsp&nbsp&nbsp
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>
+     <li class="nav-item">
 
-<!-- &nbsp&nbsp&nbsp -->         
+        <a href="../logout.php"><i class="fas fa-power-off"></i>&nbsp&nbspLogout
+          <!-- &nbsp&nbsp&nbsp&nbsp | -->
+        </a>
+      </li>
+<!-- &nbsp&nbsp&nbsp --> 
     </ul>
   </div>
 </nav>
