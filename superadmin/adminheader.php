@@ -34,7 +34,7 @@ include ("../includes/header.php");
         <a class="nav-link" href="staff.php">Staff</a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="#">Loans</a>
+        <a class="nav-link" href="Loans.php">Loans</a>
       </li>
         <li class="nav-item">
         <a class="nav-link" href="saving.php">Saving</a>
@@ -51,7 +51,7 @@ include ("../includes/header.php");
       </li>
      <li class="nav-item">
 
-        <a href="../logout.php"><i class="fas fa-power-off"></i>&nbsp&nbspLogout</span>
+        <a href="../logout.php"><i class="fas fa-power-off"></i>&nbsp&nbspLogout
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>

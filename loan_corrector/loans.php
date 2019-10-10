@@ -62,6 +62,7 @@ echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
 		</div>
     <div class="col-md-4">
     <br>
+    
       <div class="card">
         <div class="card-header"><center>Payment tab</center></div>
         <div class="card-body">
@@ -165,8 +166,8 @@ echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
       </div>
     </div>
   </div>
-</div><br>
-
+</div><br
+>
 <div class="card">
   <div class="card-header">
   <?php
