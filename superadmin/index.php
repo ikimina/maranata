@@ -231,7 +231,7 @@ $user=new User($con,null) ;
          // var ctx = document.getElementById("barchart").getContext('2d');
          var ctx = $("#loansChart");
          var barGraph= new Chart(ctx, {
-              type:"bar",
+              type:"pie",
               data:chartdata
          });
 
@@ -460,12 +460,12 @@ beginAtZero: true
 <script type="text/javascript">
 var ctx = document.getElementById("dougnutChart").getContext('2d');
 var myChart = new Chart(ctx, {
-type: 'doughnut',
+type: 'pie',
 data: {
-labels: ["5000-50000","50000-150000","150000-500000","500000-Above"],
+labels: ["Male","Female"],
 datasets: [{
 label: 'Loans',
-data: [12, 19, 3, 5],
+data: [12, 19],
 backgroundColor: [
 'rgba(255, 99, 132, 0.2)',
 'rgba(54, 162, 235, 0.2)',

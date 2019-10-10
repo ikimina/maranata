@@ -13,7 +13,6 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 	exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +20,7 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 	<title>Maranata-<?php echo  $userLoggedIn->getFname();?> | Dashboard</title>
 
 </head>
-<body><br>
+<body style="background-image: linear-gradient(to top, rgba(255,0,0,0), rgba(0,255,255,.1));"><br>
 <div class="container">
  <div class="row">
  	<div class="col-md-4">
@@ -45,43 +44,33 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 				<div class="header">
 					<br><br><br><br>
 				</div>
-			</div>
+			</div><br>
 		</div>
 		<div class="col-md-3">
 			<div class="card">
 				<div class="header">
 					<br><br><br><br>
 				</div>
-			</div>
+			</div><br>
 		</div>
 		<div class="col-md-3">
 			<div class="card">
 				<div class="header">
 					<br><br><br><br>
 				</div>
-			</div>
+			</div><br>
 		</div>
 		<div class="col-md-3">
 			<div class="card">
 				<div class="header">
 					<br><br><br><br>
 				</div>
-			</div>
+			</div><br>
 		</div>
 	</div>
 
 	<hr>
-<div class="row">
-	<div class="col-md-3">
-		<div class="card">
-			<div class="card-header">
-				<br><br><br>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-3"></div>
-	<div class="col-md-3"></div>
-</div>
+
 <hr>
 
 <div class="row" id="profile">
@@ -104,8 +93,7 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 						</label>
 						<label class="form-control">Date of Birth:&nbsp;&nbsp;<b><?php echo $userLoggedIn->getDob(); ?></b></label>
 						<label class="form-control">
-						Gender: &nbsp&nbsp&nbsp      
-						Marital-Status::&nbsp;&nbsp;<b><?php echo $userLoggedIn->getMeritalStatus(); ?></b>
+						Gender: &nbsp;&nbsp;&nbsp;<b><?php echo $userLoggedIn->getMeritalStatus(); ?></b>
 						</label>
 					</div>
 				<div class="col-md-6">
