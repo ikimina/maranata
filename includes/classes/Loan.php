@@ -45,6 +45,10 @@ class Loan
 	{
 		return $this->sqlData['status'];
 	}
+	public function getAmountToReturn()
+	{
+		return (int)$this->sqlData['amount']+((int)$this->sqlData['amount'] * (int) $this->sqlData['rate']);
+	}
 	
 	public function payedLoan()
 	{
@@ -69,17 +73,21 @@ class Loan
 	}
 	public function receivedDate()
 	{
-		$this->sqlData["rec_date"];
+		return strftime("%b %d, %Y",strtotime($this->sqlData["rec_date"]));
 	}
+	
 	public function payementDeadline()
 	{
-		//recivedDate+duration
+		return date("Y-m-d",strtotime('+3 months', strtotime($this->sqlData["rec_date"])));
 	}
 	public function getDuration()
 	{
-		$this->sqlData['duration'];
+		return $this->sqlData['duration'];
+	}public function getRate()
+	{
+		return $this->sqlData['rate'];
 	}
-
+  
 	public function getUserAllLoan($rpp, $pn,$last){
          
   $user=$this->tel;
@@ -109,7 +117,7 @@ $i=1;
 foreach ($q1 as $row) {
     
      $dataString .='<tr> <td>'.$i++.'</td>
-    <td>'.$row['rec_date'].'</td>
+    <td>'. strftime("%b %d, %Y",strtotime($row['rec_date'])).'</td>
     <td>'.$row['amount'].'</td>
     <td>'.$row['payed'].'</td>
    

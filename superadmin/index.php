@@ -9,6 +9,10 @@ require_once("../includes/classes/Loan.php");
 $transaction= new Transaction($con,null);
 $loan= new Loan($con,null);
 $user=new User($con,null) ;
+$res=$transaction->makeSavingGraph();
+for ($i=0; $i < count($res); $i++) { 
+ // echo $res[$i]."<br>";
+}
 ?>
 <br>
 </body>
@@ -136,7 +140,7 @@ $user=new User($con,null) ;
 
   <div class="row">
     <div class="col-md-4 card" style="margin-left: 1%;">
-     <div class="card-header" style="background-color: rgba(255, 99, 132, 0.2);font-weight: bold;"><center>Savings Chart per year</center></div>
+     <div class="card-header" style="background-color: rgba(255, 99, 132, 0.2);font-weight: bold;"><center>Gender in Maranata</center></div>
        <canvas id="savingsChart" style="max-width: 500px;"></canvas>
      </div><br>
      <div class="col-md-4 card" style="margin-left: 2%;">
@@ -251,20 +255,20 @@ $user=new User($con,null) ;
   $(document).ready(function() {
   
   $.ajax({
-       url:"http://localhost/IkiminaGit/maranata/Graph/data.php",
+       url:"http://localhost/oaz/maranata/Graph/sexGraph.php",
        method:"GET",
        success: function(data){
         console.log(data);
-         var month = [];
-         var rain = [];
+         var gender = [];
+         var num = [];
 
          for (var i  in data) {
-          month.push(data[i].moth);
-          rain.push(data[i].rain);
+          gender.push(data[i].gen);
+          num.push(data[i].num);
          }
 
          var chartdata = {
-            labels: month,
+            labels: gender,
             datasets:[
                {
                   label:'Savings',
@@ -305,7 +309,7 @@ $user=new User($con,null) ;
                                     'rgba(0, 255, 64, 0.5)'
                                     ],
                   hoverBorderColor:'rgba(255,99,132,1)',
-                  data:rain
+                  data:num
 
                }
             ]
@@ -314,7 +318,7 @@ $user=new User($con,null) ;
          // var ctx = document.getElementById("barchart").getContext('2d');
          var ctx = $("#savingsChart");
          var barGraph= new Chart(ctx, {
-              type:"bar",
+              type:"pie",
               data:chartdata
          });
 

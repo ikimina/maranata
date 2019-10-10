@@ -51,7 +51,11 @@ class User
     public function getLastName() {
         return $this->sqlData["phone"];
     }
-
+    function getSexGraph(){
+        $sql1 = "SELECT sex FROM members WHERE active='yes'";
+        $q1=$this->con->query($sql1);
+         return $q1;
+    }
     public function getEmail() {
         return $this->sqlData["email"];
     }
