@@ -1,7 +1,7 @@
 <?php
 
 try {
-	$con=new PDO("pgsql:host=localhost;dbname=maranata","postgres","root");
+	$con=new PDO("pgsql:host=localhost;dbname=maranata","postgres","123");
 
 	
 	
