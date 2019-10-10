@@ -9,7 +9,6 @@ include ("../includes/header.php");
 ?>
 <!DOCTYPE html>
 <html>
-
 <body>
 <!--Navbar -->
 

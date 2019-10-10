@@ -188,6 +188,16 @@ $loan=new Loan($con,$phone) ;
 		</div>
 	</div>
 </div>
+<br>
+<div class="container-fluid">
+	<div class="card">
+		<div class="card-header">
+			<?php
+               include("../includes/footer.php");
+			?>
+		</div>
+	</div>
+</div><br>
 </body>
 </html>
 <script type="text/javascript">

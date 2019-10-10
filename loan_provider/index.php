@@ -95,8 +95,8 @@ for ($i=0; $i < count($res); $i++) {
           <center><font><i class="fas fa-users"></i>&nbsp;All Members</font></center>
           <hr>
           <center><h3><?php echo $user->getAllUser(); ?></h3></center>
-          <hr>
-          <a href="registration.php">Read More</a>
+<!--           <hr>
+          <a href="registration.php">Read More</a> -->
         </div>
       </div>
     </div>
@@ -106,8 +106,8 @@ for ($i=0; $i < count($res); $i++) {
           <center><font><i class="fas fa-money-check"></i>&nbsp;Total Savings</font></center>
           <hr>
           <center><h3><?php echo $transaction->getTotalBalance(); ?><span style="font-size: 13px;">Rwf</span></h3></center>
-          <hr>
-          <a href="saving.php">Read More</a>
+<!--           <hr>
+          <a href="saving.php">Read More</a> -->
         </div>
       </div>
     </div>
@@ -117,8 +117,8 @@ for ($i=0; $i < count($res); $i++) {
           <center><font>Returned Loans</font></center>
           <hr>
           <center><h3>50000</h3></center>
-          <hr>
-          <a href="">Read More</a>
+<!--           <hr>
+          <a href="">Read More</a> -->
         </div>
       </div>
     </div>
@@ -128,8 +128,8 @@ for ($i=0; $i < count($res); $i++) {
           <center><font>Unreturned Loans</font></center>
           <hr>
           <center><h3>12000</h3></center>
-          <hr>
-          <a href="">Read More</a>
+<!--           <hr>
+          <a href="">Read More</a> -->
         </div>
       </div>
     </div>

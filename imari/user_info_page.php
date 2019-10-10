@@ -7,23 +7,24 @@ require_once("../includes/classes/user.php");
 require_once("../includes/classes/transaction.php");
 require_once("../includes/classes/Loan.php");
 
+$transaction=new Transaction($con,$_SESSION['user']) ;
 $phone="";
 if (isset($_GET['user'])) {
 	$phone=$_GET['user'];
-	$id=$_GET['l'];
 }
 else{
 	header("Location:index.php");
 	exit();
 }
-function leaveSpace($size)
+$user=new User($con,$phone) ;
+$transaction=new Transaction($con,$phone) ;
+$loan=new Loan($con,$phone) ;
+ function leaveSpace($size)
 {
 	for ($i=0; $i <$size ; $i++) { 
 		echo '&nbsp';
 	}
 }
-$sql1 = "SELECT * FROM refere  WHERE user_phone='$phone' AND loan_id='$id'";
-$q1=$con->query($sql1);
 
 ?>
 
@@ -39,16 +40,10 @@ $q1=$con->query($sql1);
 	</style>
 </head>
 <body>
-	<div class="continer">
-	<?php
-foreach ($q1 as $row) {
-$user=new User($con,$row['ref_phone']) ;
-$transaction=new Transaction($con,$row['ref_phone']) ;
- 
-?>
-<div class="continer-fluid">
+<div class="container-fluid">
 	<br><div class="row">
-		<div class="col-md-6">
+	    <div class="col-md-2"></div>
+		<div class="col-md-8">
 			<div class="card">
 			<div class="card-header">
 				<div class="row">
@@ -150,31 +145,11 @@ $transaction=new Transaction($con,$row['ref_phone']) ;
 				</div>
 			</div>
 		</div>
-
 		<?php ?>
-		<hr>
-		<div class="col-md-6">
-			<div class="card">
-			<h5 class="alert alert-info"><center>Account usage info</center></h5>
-			<div class="card-body">
-				<div class="row">
-					<div class="col-md-6">
-					<p class="alert alert-info">Saving Balance:&nbsp;<b><?php echo $transaction->getBalance() ?></b>&nbsp;Rwf&nbsp;</p>
-					<a href="">Other Saving Info</a></div>
-					<div class="col-md-6">
-					<p class="alert alert-warning">Unpaid Loan&nbsp;<b>0&nbsp;</b>Rwf&nbsp;</p>
-					<a href="">Other Loan Info</a> </div>
-					
-				</div>
-			</div>
-			<div class="card-footer">
-				<center><b>Transactions</b></center>
-			</div>
-			</div>
-		</div>
+		<div class="col-md-2"></div>
 	</div>
-	<hr>
-</div><?php } ?></div>
+</div><br>
+
 <div class="container-fluid">
 	<div class="card">
 		<div class="card-header">

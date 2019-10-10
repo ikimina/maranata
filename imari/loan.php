@@ -120,6 +120,17 @@ echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
     </div>
   </div>
 </div>
+
+<br>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <?php
+               include("../includes/footer.php");
+      ?>
+    </div>
+  </div>
+</div><br>
 <script type="text/javascript">
 	function _(id) {
 		return document.getElementById(id);

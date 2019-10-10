@@ -52,7 +52,10 @@ $rows = $con->query($sql)->fetchColumn();
 ?>
 <br>
  <div class="container-fluid">
-<button class="btn btn-primary" id="showUserList">Registered Members</button><a href="registration.php"><button id="newMember" class="btn btn-primary" style="display: none;">New Members</button></a>
+<button class="btn btn-primary btn-sm" id="showUserList">Registered Members</button><a href="registration.php">
+<button id="newMember" class="btn btn-primary btn-sm" style="display: none;">
+  New Members
+</button></a>
   <div class="card"  id="registrationForm">
     <?php
     if (isset($_GET['r'])) {
@@ -230,6 +233,17 @@ $rows = $con->query($sql)->fetchColumn();
       </div>
     </div>
   </div>
+
+  <br>
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <?php
+      include("../includes/footer.php");
+      ?>
+    </div>
+  </div>
+</div><br>
 
 <script type="text/javascript">
   $("#showUserList").click(function(){

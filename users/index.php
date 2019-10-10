@@ -38,41 +38,6 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 
  <hr>
 
-	<div class="row">
-		<div class="col-md-3">
-			<div class="card">
-				<div class="header">
-					<br><br><br><br>
-				</div>
-			</div><br>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<div class="header">
-					<br><br><br><br>
-				</div>
-			</div><br>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<div class="header">
-					<br><br><br><br>
-				</div>
-			</div><br>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<div class="header">
-					<br><br><br><br>
-				</div>
-			</div><br>
-		</div>
-	</div>
-
-	<hr>
-
-<hr>
-
 <div class="row" id="profile">
 	<div class="col-md-12">
 		<div class="card" style="box-shadow: none;border: 1px solid;">
