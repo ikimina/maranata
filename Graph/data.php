@@ -20,16 +20,7 @@
  $conn->close();
 
  print json_encode($data);
-
-
-
-
- for ($i=1; $i < 12; $i++) { 
- 	
- 	$sel= *-$i-*;
- 	$query=select amount from table where rec-time = $sel;
     
- }
 ?>
 
 

@@ -235,7 +235,7 @@ for ($i=0; $i < count($res); $i++) {
          // var ctx = document.getElementById("barchart").getContext('2d');
          var ctx = $("#loansChart");
          var barGraph= new Chart(ctx, {
-              type:"pie",
+              type:"bar",
               data:chartdata
          });
 
@@ -255,7 +255,7 @@ for ($i=0; $i < count($res); $i++) {
   $(document).ready(function() {
   
   $.ajax({
-       url:"http://localhost/oaz/maranata/Graph/sexGraph.php",
+       url:"http://localhost/IkiminaGit/maranata/Graph/sexGraph.php",
        method:"GET",
        success: function(data){
         console.log(data);
