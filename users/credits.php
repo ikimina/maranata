@@ -142,8 +142,12 @@ $loan=new Loan($con,$_SESSION['user']);
                   (int)$pn=$_GET['pn'];
                   }
                   else $pn=1;
-                  echo $loan->getUserAllLoan(5,$pn,$last);
+                  if ($rows==0) {
+                  	echo "<center><p style='color:gray;'>No History yet</p></center>";
+                  }
+                  else{ echo $loan->getUserAllLoan(5,$pn,$last);
 
+               
                   $paginationCtrls = "";
     // Only if there is more than 1 page worth of results give the user pagination controls
     if($last != 1){
@@ -158,7 +162,7 @@ $loan=new Loan($con,$_SESSION['user']);
           $paginationCtrls .= '<a href='.$_SERVER['PHP_SELF'].'?pn='.(string)($pn+1).'><button>&gt;</button></a>';
       }
     }
-echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
+echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";}
 
 				?>
                </div>
