@@ -41,12 +41,12 @@ for ($i=0; $i < count($res); $i++) {
         </select><br>
               
       </div>
-      <div class="col-md-4"><center><h5>2019</h5></center></div>  
-      <div class="col-md-5">
+      <div class="col-md-3"><center><h5>2019</h5></center></div>  
+      <div class="col-md-6">
         <label class="form-control">
-        <center>Total Loan this year   450000</center>
+      Total Loan this year  <b> <?php echo array_sum($loan->getLoanMounthy('2019'))."Rwf"; ?></b>
         </label>
-      </div><?php echo $loan->receivedDate(); ?>
+      </div>
        <div class="table-responsive">
         <table class="table table-stripped table-bordered">
           <th>Jan</th>
@@ -62,18 +62,12 @@ for ($i=0; $i < count($res); $i++) {
           <th>Nov</th>
           <th>Dec</th>
           <tr>
-            <td>45000</td>
-            <td>45000</td>
-              <td>45000</td>
-            <td>45000</td>
-            <td>45000</td>
-                <td>45000</td> 
-                <td>45000</td>
-                <td>45000</td>
-                <td>45000</td>
-                <td>45000</td>
-                <td>45000</td>
-                <td>45000</td>
+            <?php 
+            for ($i=0; $i <count($loan->getLoanMounthy('2019')) ; $i++) { 
+                      echo "<td>".$loan->getLoanMounthy('2019')[$i]."</td>";
+                    } ?>
+            
+          
           </tr>
          </table>
          </div>

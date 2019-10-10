@@ -4,6 +4,7 @@ include("imariheader.php");
 include ("../includes/dbconnect.php");
 require_once("../includes/classes/Loan.php");
 $loan= new Loan($con,null);
+
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,11 @@ $loan= new Loan($con,null);
 			<div class="card" style="box-shadow: none;border: 1px solid;border-radius: 0px;">
 				<div class="card-header"><center><u>Loan</u></center><br>
 
-                    
+                    <?php 
+                    for ($i=0; $i <count($loan->getLoanMounthy('2019')) ; $i++) { 
+                      echo $loan->getLoanMounthy('2019')[$i]."<br>";
+                    }
+                    ?>
 
     <button style="border: none;background: transparent;"><form> <input type="search" name="" style="border-radius: 10px;"><button style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;background: transparent;"><img src="../images/search.png" width="20" height="20" ></button></form></button>
 <div style="float: right;">
@@ -36,12 +41,12 @@ $loan= new Loan($con,null);
                    
                     $query->execute();
                     $rows= $query->fetchColumn();
-                  $last=ceil($rows/2) ;
+                  $last=ceil($rows/6) ;
                   if (isset($_GET['pn'])) {
                   (int)$pn=$_GET['pn'];
                   }
                   else $pn=1;
-                  echo $loan->getAllLoan(2,$pn,$last);
+                  echo $loan->getAllLoan(6,$pn,$last);
 
                   $paginationCtrls = "";
     // Only if there is more than 1 page worth of results give the user pagination controls

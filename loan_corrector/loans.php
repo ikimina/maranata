@@ -34,12 +34,12 @@ $loan= new Loan($con,null);
                    
                     $query->execute();
                     $rows= $query->fetchColumn();
-                  $last=ceil($rows/2) ;
+                  $last=ceil($rows/6) ;
                   if (isset($_GET['pn'])) {
                   (int)$pn=$_GET['pn'];
                   }
                   else $pn=1;
-                  echo $loan->getAllLoan(2,$pn,$last);
+                  echo $loan->getAllLoanCorrector(6,$pn,$last);
 
                   $paginationCtrls = "";
     // Only if there is more than 1 page worth of results give the user pagination controls
@@ -75,24 +75,8 @@ echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
             </form>
           </div><br>
 
-           <div>
-            <p class="alert alert-danger alert-dismissible fade show">May be the user has not unpaid loan
-             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-               <span aria-hidden="true">&times;</span>
-             </button>
-            </p>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">Names</span>
-            </div>
-            <label  class="form-control" ></label>
-             </div>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">Unpaid</span>
-            </div>
-            <label  class="form-control" ></label>
-             </div>            
+           <div id="userInfo">
+                        
           </div>
    <center> <p class="alert alert-info">PAYMENT INFO</p></center>
 
@@ -123,53 +107,8 @@ echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
 </body>
 </html>
 
-<!-- Modal -->
-<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter Referee Now</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form class="form">
-        	
-        	<label>Telephone</label>
-        	<input type="text" name="old" readonly value="" style="background-color: transparent;" id="user" class="form-control"><br>
-          <input type="hidden"  id="user1" >
-          <input type="hidden"  id="lid" >
-        	<label>
-        		Referee 1
-        	</label><span id="ref1">&nbsp;<b></b></span>
-        	<input type="text" name="new" id="r1" class="form-control" placeholder="Telephone For Referee 1" onkeyup="bringRef(this.value,'ref1')"><br>
 
-        	<label>
-        		Referee 2
-        	</label><span id="ref2">&nbsp;<b></b></span>
-        	<input type="text" id="r2" name="new" class="form-control" placeholder="Telephone For Referee 2" onkeyup="bringRef(this.value,'ref2')"><br>
 
-        	<label>
-        		Referee 3
-        	</label><span id="ref3">&nbsp;<b></b></span>
-        	<input type="text" id="r3" name="new" class="form-control" placeholder="Telephone For Referee 3" onkeyup="bringRef(this.value,'ref3')"><br>
-
-        
-
-        </form>
-      </div>
-      <div class="modal-footer"><span id="refresponse"></span>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary" onclick="saveRef()">Save</button>
-      </div>
-    </div>
-  </div>
-</div><br
->
-<div class="card">
-  <div class="card-header">
   <?php
 include("../includes/footer.php");
 ?> 
@@ -229,3 +168,53 @@ include("../includes/footer.php");
            xmlhttp.send();
 	}
 </script>
+<script type="text/javascript">
+  
+ function _(id) {
+  return document.getElementById(id);
+   }
+  function retriveMemberInfo() {
+
+    var tel=_("searchInput").value;
+         xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      var res=this.responseText;
+
+      _('userInfo').innerHTML=res;
+      //_('worspace').style.display="block";
+    }
+  }
+  xmlhttp.open("GET","../imari/retriveUser.php?telcorrector="+tel,true);
+  xmlhttp.send();
+  }
+  function saveTranscation() {
+    _("error").innerHTML="";
+    var userval=_("user").innerHTML;
+  var ammount=_("ammount").value;
+  _("ammount").value="";
+  var phone=_('phone').innerHTML;
+   if (userval !="") {
+    _("error").innerHTML="To who are saving to?";
+    return;
+  }
+  if (ammount=="") {
+  
+    _("error").innerHTML=" Are trying to save nothing? , you must put some value here";
+    return;
+  } 
+ var comment=_('comment').value;
+ _('comment').value="";
+ var dataString="phone="+phone+"&ammount="+ammount+"&comment="+comment;
+  xmlhttp=new XMLHttpRequest();
+  xmlhttp.onreadystatechange=function() {
+    if (this.readyState==4 && this.status==200) {
+      var res=this.responseText;
+      
+      _('saveRes').innerHTML=res;
+    }
+  }
+  xmlhttp.open("GET","saveMoney.php?"+dataString,true);
+  xmlhttp.send();
+  }
+ </script>

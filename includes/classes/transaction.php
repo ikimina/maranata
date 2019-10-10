@@ -92,7 +92,7 @@ $i=1;
 foreach ($q1 as $row) {
     
      $dataString .='<tr> <td>'.$i++.'</td>
-    <td>'.$row['done_on'].'</td><td>'.$row['amount'].'</td><td>'.$row['actions']."</td></tr>";
+    <td>'.strftime("%b %d, %Y",strtotime($row['done_on'])).'</td><td>'.$row['amount'].'</td><td>'.$row['actions']."</td></tr>";
   }
    
  
@@ -127,7 +127,7 @@ foreach ($q1 as $row) {
 	$user=new User($this->con,$row['user_phone']);
     
      $dataString .='<tr> <td>'.$i++.'</td>
-    <td>'.$row['done_on'].'</td>
+    <td>'.strftime("%b %d, %Y",strtotime($row['done_on'])).'</td>
     <td>'.$user->getNames().'</td><td>'
     .$row['amount'].'</td><td>'.$row['actions']."</td></tr>";
   }

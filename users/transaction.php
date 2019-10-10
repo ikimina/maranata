@@ -44,6 +44,10 @@ include ("../includes/dbconnect.php");
                   (int)$pn=$_GET['pn'];
                   }
                   else $pn=1;
+                   if ($rows==0) {
+                    echo "<center><p style='color:gray;'>No Transaction yet</p></center>";
+                  }
+                  else{
                   echo $transaction->getUserAllTransaction(2,$pn,$last);
 
                   $paginationCtrls = "";
@@ -60,7 +64,7 @@ include ("../includes/dbconnect.php");
           $paginationCtrls .= '<a href='.$_SERVER['PHP_SELF'].'?pn='.(string)($pn+1).'><button>&gt;</button></a>';
       }
     }
-echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
+echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";}
 
 				?></div>
 			</div>

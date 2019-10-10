@@ -53,7 +53,7 @@ if ($userLoggedIn->getChangingPasswordCount()<2) {
 						<label class="form-control">First Name:&nbsp;&nbsp;<b><?php echo $userLoggedIn->getFname(); ?></b></label>
 						<label class="form-control">Last Name:&nbsp;&nbsp;<b><?php echo $userLoggedIn->getLname(); ?></b></label>
 						<label class="form-control">
-						Bank:&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp 
+						Bank:<b><?php echo $userLoggedIn->getBankName(); ?></b>&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp 
 						Account No.: &nbsp;&nbsp;<b><?php echo $userLoggedIn->getAccountNumber(); ?></b>
 						</label>
 						<label class="form-control">Date of Birth:&nbsp;&nbsp;<b><?php echo $userLoggedIn->getDob(); ?></b></label>

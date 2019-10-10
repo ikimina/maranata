@@ -46,12 +46,12 @@ $transaction= new Transaction($con,null);
                 // $sql = "SELECT COUNT(id) FROM transactions WHERE user_phone=".$_SESSION["user"]."";
                 //  $rows = $con->query($sql)->fetchColumn();
                     $rows= $query->fetchColumn();
-                  $last=ceil($rows/2) ;
+                  $last=ceil($rows/6) ;
                   if (isset($_GET['pn'])) {
                   (int)$pn=$_GET['pn'];
                   }
                   else $pn=1;
-                  echo $transaction->getAllTransaction(2,$pn,$last);
+                  echo $transaction->getAllTransaction(6,$pn,$last);
 
                   $paginationCtrls = "";
     // Only if there is more than 1 page worth of results give the user pagination controls
