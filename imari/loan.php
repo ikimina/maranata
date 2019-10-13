@@ -24,9 +24,7 @@ $loan= new Loan($con,null);
 				<div class="card-header"><center><u>Loan</u></center><br>
 
                     <?php 
-                    for ($i=0; $i <count($loan->getLoanMounthy('2019')) ; $i++) { 
-                      echo $loan->getLoanMounthy('2019')[$i]."<br>";
-                    }
+                    
                     ?>
 
     <button style="border: none;background: transparent;"><form> <input type="search" name="" style="border-radius: 10px;"><button style="font-weight: 600 !important;border: 1px solid;border-radius: 10px;background: transparent;"><img src="../images/search.png" width="20" height="20" ></button></form></button>
@@ -125,17 +123,6 @@ echo "<tr><td colspan='4'>".$paginationCtrls."</td><tr></table>";
     </div>
   </div>
 </div>
-
-<br>
-<div class="container-fluid">
-  <div class="card">
-    <div class="card-header">
-      <?php
-               include("../includes/footer.php");
-      ?>
-    </div>
-  </div>
-</div><br>
 <script type="text/javascript">
 	function _(id) {
 		return document.getElementById(id);
