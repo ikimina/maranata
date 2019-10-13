@@ -134,6 +134,66 @@ class User
             $rows = $this->con->query($sql)->fetchColumn();
        return $rows;
     }
+        public function getSavingMounthy($y)
+    {
+        $totalMountSave=0;
+        $dataArray=array();
+        for ($i=1; $i <= 12; $i++) { 
+            if ($i<10) {
+                $i="0".$i;
+
+            }
+            $end="";
+            if ($i==1) {
+                $end="31";
+            }
+            if ($i==2) {
+                $end="28";
+            }
+            if ($i==3) {
+                $end="31";
+            }
+            if ($i==4) {
+                $end="30";
+            }
+            if ($i==5) {
+                $end="31";
+            }
+            if ($i==6) {
+                $end="30";
+            }
+            if ($i==7) {
+                $end="31";
+            }
+            if ($i==8) {
+                $end="31";
+            }
+            if ($i==9) {
+                $end="30";
+            }
+            if ($i==10) {
+                $end="31";
+            }
+            if ($i==11) {
+                $end="30";
+            }
+            if ($i==12) {
+                $end="31";
+            }
+            $from=$y.'-'.$i.'-01';
+            $to=$y.'-'.$i.'-'.$end;
+            $sql1 = "SELECT * FROM transactions WHERE tr_id='1' AND  done_on >='$from' AND done_on <='$to'";
+            $q1=$this->con->query($sql1);
+
+            foreach ($q1 as $row) {
+                $totalMountSave+=(int)$row['amount'];
+              }
+
+   array_push($dataArray, $totalMountSave);
+   $totalMountSave=0;
+ }
+        return $dataArray;    
+    }
        
 }
 

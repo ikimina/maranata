@@ -133,18 +133,18 @@ for ($i=0; $i < count($res); $i++) {
 
 
   <div class="row">
-    <div class="col-md-4 card" style="margin-left: 1%;">
+    <div class="col-md-5 card" style="margin-left: 1%;">
      <div class="card-header" style="background-color: rgba(255, 99, 132, 0.2);font-weight: bold;"><center>Gender in Maranata</center></div>
        <canvas id="savingsChart" style="max-width: 500px;"></canvas>
      </div><br>
-     <div class="col-md-4 card" style="margin-left: 2%;">
+     <div class="col-md-6 card" style="margin-left: 2%;">
      <div class="card-header" style="background-color: rgba(75, 78, 80, 0.2);font-weight: bold;"><center>Savings category</center></div>
        <canvas id="dougnutChart" style="max-width: 500px;"></canvas>
      </div><br>
-     <div class="col-md-3 card" style="margin-left: 2%;">
+     <!-- <div class="col-md-3 card" style="margin-left: 2%;">
      <div class="card-header" style="background-color: rgba(255, 206, 86, 0.2);font-weight: bold;"><center>Years category</center></div>
        <canvas id="yearsChart" style="max-width: 500px;"></canvas><br>
-     </div>
+     </div> -->
    </div> 
 
 </div>
@@ -166,7 +166,7 @@ for ($i=0; $i < count($res); $i++) {
   $(document).ready(function() {
   
   $.ajax({
-       url:"http://localhost/IkiminaGit/maranata/Graph/data.php",
+       url:"http://localhost/oaz/maranata/Graph/loanGraph.php",
        method:"GET",
        success: function(data){
         console.log(data);
@@ -193,7 +193,7 @@ for ($i=0; $i < count($res); $i++) {
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
                                     'rgba(255, 200, 86, 0.2)',
-                                    'rgba(75, 78, 80, 0.2)',
+                                    'rgba(75, 78, 255, 0.2)',
                                     'rgba(30, 60, 255, 0.3)',
                                     'rgba(0, 255, 64, 0.2)'
                                     ],
@@ -238,6 +238,81 @@ for ($i=0; $i < count($res); $i++) {
         console.log(data);
        }
   });
+});$(document).ready(function() {
+  
+  $.ajax({
+       url:"http://localhost/oaz/maranata/Graph/saveGraph.php",
+       method:"GET",
+       success: function(data){
+        console.log(data);
+         var month = [];
+         var rain = [];
+
+         for (var i  in data) {
+          month.push(data[i].moth);
+          rain.push(data[i].rain);
+         }
+
+         var chartdata = {
+            labels: month,
+            datasets:[
+               {
+                  label:'Savings Variation in this year',
+                  backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 200, 86, 0.2)',
+                                    'rgba(75, 78, 255, 0.2)',
+                                    'rgba(30, 60, 255, 0.3)',
+                                    'rgba(0, 255, 64, 0.2)'
+                                    ],
+                  borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                    ],
+                hoverBackgroundColor: [
+                                    'rgba(255, 99, 132, 0.5)',
+                                    'rgba(54, 162, 235, 0.5)',
+                                    'rgba(255, 206, 86, 0.5)',
+                                    'rgba(75, 192, 192, 0.5)',
+                                    'rgba(153, 102, 255, 0.5)',
+                                    'rgba(255, 159, 64, 0.5)',
+                                    'rgba(255, 99, 132, 0.5)',
+                                    'rgba(54, 162, 235, 0.5)',
+                                    'rgba(255, 200, 86, 0.5)',
+                                    'rgba(75, 78, 80, 0.5)',
+                                    'rgba(30, 60, 255, 0.5)',
+                                    'rgba(0, 255, 64, 0.5)'
+                                    ],
+                  hoverBorderColor:'rgba(255,99,132,1)',
+                  data:rain
+
+               }
+            ]
+         };
+
+         // var ctx = document.getElementById("barchart").getContext('2d');
+         var ctx = $("#dougnutChart");
+         var barGraph= new Chart(ctx, {
+              type:"bar",
+              data:chartdata
+         });
+
+       },
+       error: function(data){
+        console.log(data);
+       }
+  });
 });
 </script>
 
@@ -249,7 +324,7 @@ for ($i=0; $i < count($res); $i++) {
   $(document).ready(function() {
   
   $.ajax({
-       url:"http://localhost/IkiminaGit/maranata/Graph/sexGraph.php",
+       url:"http://localhost/oaz/maranata/Graph/sexGraph.php",
        method:"GET",
        success: function(data){
         console.log(data);
@@ -456,7 +531,7 @@ beginAtZero: true
 <!--Graph of Joining-->
 
 <script type="text/javascript">
-var ctx = document.getElementById("dougnutChart").getContext('2d');
+//var ctx = document.getElementById("dougnutChart").getContext('2d');
 var myChart = new Chart(ctx, {
 type: 'pie',
 data: {
