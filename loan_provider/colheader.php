@@ -1,11 +1,14 @@
 <?php
 session_start();
 include ("../includes/header.php");
+require_once("../includes/classes/user.php");
+require_once("../includes/dbconnect.php");
 if (!isset($_SESSION["role"]) || $_SESSION["role"] !="2") {
 
     header("location: ../index.php"); 
     exit();
 } 
+$userLoggedIn=new User($con,$_SESSION['user']) ;
 $username= $_SESSION["user"];
 ?>
 
@@ -37,19 +40,21 @@ $username= $_SESSION["user"];
     </ul>
 
        <ul class="navbar-nav ml-auto nav-flex-icons">
-          <li class="nav-item">
-
-        <a href="../logout.php"><i class="fa fa-user" aria-hidden="true">&nbsp&nbsp&nbsp<span><?php echo $_SESSION["user"]; ?></span></i> &nbsp&nbsp&nbsp
+      <li class="nav-item">
+        <a href="index.php#profile" class="nav-link waves-effect waves-light">
+        <i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; <span><?php echo  $userLoggedIn->getFname()?> </span>
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>
-     <li class="nav-item">
 
-        <a href="../logout.php"><i class="fas fa-power-off"></i>&nbsp&nbspLogout
+       <li class="nav-item">
+        <a href="../logout.php" class="nav-link waves-effect waves-light">
+        <i class="fas fa-power-off"></i>&nbsp;&nbsp; <span>Logout</span>
           <!-- &nbsp&nbsp&nbsp&nbsp | -->
         </a>
       </li>
-<!-- &nbsp&nbsp&nbsp --> 
+
+<!-- &nbsp&nbsp&nbsp -->         
     </ul>
   </div>
 </nav>
