@@ -90,8 +90,8 @@ for ($i=0; $i < count($res); $i++) {
   				<center><font><i class="fas fa-users"></i>&nbsp;All Members</font></center>
    				<hr>
    				<center><h3><?php echo $user->getAllUser(); ?></h3></center>
-   				<hr>
-   				<a href="registration.php">Read More</a>
+   				<!-- <hr>
+   				<a href="registration.php">Read More</a> -->
    			</div>
    		</div>
    	</div>
@@ -101,8 +101,8 @@ for ($i=0; $i < count($res); $i++) {
    				<center><font><i class="fas fa-money-check"></i>&nbsp;Total Savings</font></center>
    				<hr>
    				<center><h3><?php echo $transaction->getTotalBalance(); ?><span style="font-size: 13px;">Rwf</span></h3></center>
-   				<hr>
-   				<a href="saving.php">Read More</a>
+   				<!-- <hr>
+   				<a href="saving.php">Read More</a> -->
    			</div>
    		</div>
    	</div>
@@ -112,8 +112,8 @@ for ($i=0; $i < count($res); $i++) {
   				<center><font>Returned Loans</font></center>
    				<hr>
    				<center><h3>50000</h3></center>
-   				<hr>
-   				<a href="">Read More</a>
+   				<!-- <hr>
+   				<a href="">Read More</a> -->
    			</div>
    		</div>
    	</div>
@@ -123,8 +123,8 @@ for ($i=0; $i < count($res); $i++) {
   				<center><font>Unreturned Loans</font></center>
    				<hr>
    				<center><h3>12000</h3></center>
-   				<hr>
-   				<a href="">Read More</a>
+   				<!-- <hr>
+   				<a href="">Read More</a> -->
    			</div>
    		</div>
    	</div>
@@ -166,7 +166,7 @@ for ($i=0; $i < count($res); $i++) {
   $(document).ready(function() {
   
   $.ajax({
-       url:"http://localhost/oaz/maranata/Graph/loanGraph.php",
+       url:"http://localhost/IkiminaGit/maranata/Graph/loanGraph.php",
        method:"GET",
        success: function(data){
         console.log(data);
@@ -182,7 +182,7 @@ for ($i=0; $i < count($res); $i++) {
             labels: month,
             datasets:[
                {
-                  label:'Loans Variation in this year',
+                  label:'Loans Variation',
                   backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
@@ -241,7 +241,7 @@ for ($i=0; $i < count($res); $i++) {
 });$(document).ready(function() {
   
   $.ajax({
-       url:"http://localhost/oaz/maranata/Graph/saveGraph.php",
+       url:"http://localhost/IkiminaGit/maranata/Graph/saveGraph.php",
        method:"GET",
        success: function(data){
         console.log(data);
@@ -257,7 +257,7 @@ for ($i=0; $i < count($res); $i++) {
             labels: month,
             datasets:[
                {
-                  label:'Savings Variation in this year',
+                  label:'Savings Variation',
                   backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
@@ -267,7 +267,7 @@ for ($i=0; $i < count($res); $i++) {
                                     'rgba(255, 159, 64, 0.2)',
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 200, 86, 0.2)',
+                                    'rgba(255, 200, 86, 0.5)',
                                     'rgba(75, 78, 255, 0.2)',
                                     'rgba(30, 60, 255, 0.3)',
                                     'rgba(0, 255, 64, 0.2)'
@@ -289,7 +289,7 @@ for ($i=0; $i < count($res); $i++) {
                                     'rgba(255, 159, 64, 0.5)',
                                     'rgba(255, 99, 132, 0.5)',
                                     'rgba(54, 162, 235, 0.5)',
-                                    'rgba(255, 200, 86, 0.5)',
+                                    'rgba(255, 200, 86, 1)',
                                     'rgba(75, 78, 80, 0.5)',
                                     'rgba(30, 60, 255, 0.5)',
                                     'rgba(0, 255, 64, 0.5)'
@@ -324,7 +324,7 @@ for ($i=0; $i < count($res); $i++) {
   $(document).ready(function() {
   
   $.ajax({
-       url:"http://localhost/oaz/maranata/Graph/sexGraph.php",
+       url:"http://localhost/IkiminaGit/maranata/Graph/sexGraph.php",
        method:"GET",
        success: function(data){
         console.log(data);
